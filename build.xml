@@ -1,0 +1,12 @@
+<project name="weboshot" default="deploy" basedir=".">
+ 	<property file="build.properties"></property>
+ 	<target name="deploy">
+ 		<sync todir="${full.deploy.path}" includeEmptyDirs="true" verbose="true">
+          	<fileset dir=".">
+              	<exclude name="**/test/**"></exclude>
+          		<exclude name="build.properties"></exclude>
+          		<exclude name="build.xml"></exclude>
+         	</fileset>
+ 		</sync>
+  	</target>
+</project>
