@@ -1,0 +1,1 @@
+<h5 style="text-align:center;">Copyright @2018 My Own Company Name</h5>
