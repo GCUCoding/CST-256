@@ -2,6 +2,8 @@
 namespace App\Services\Data;
 
 use Carbon\Exceptions\Exception;
+use App\Models\ProfileModel;
+use App\Models\UserModel;
 
 class DataAccessObject
 {
@@ -44,13 +46,13 @@ class DataAccessObject
         }
     }
 
-    public function AddUser($username, $password)
+    public function AddUser(UserModel $user)
     {
         try
         {
-            if ($this->isUnique($username))
+            if ($this->isUnique($user->getUsername()))
             {
-                $this->dbQuery = "INSERT INTO user (USERNAME, PASSWORD) VALUES ('" . $username . "', '" . $password . "')";
+                $this->dbQuery = "INSERT INTO user (USERNAME, PASSWORD) VALUES ('" . $user->getUsername() . "', '" . $user->getPassword() . "')";
                 mysqli_query($this->conn, $this->dbQuery);
                 mysqli_close($this->conn);
                 return true;
@@ -87,7 +89,7 @@ class DataAccessObject
         {
         }
     }
-    
+
     public function getUserID($username)
     {
         try
@@ -104,14 +106,14 @@ class DataAccessObject
             else
             {
                 mysqli_close($this->conn);
-                return -1;
+                return - 1;
             }
         }
         catch (Exception $e)
         {
         }
     }
-    
+
     public function getUserRole($username)
     {
         try
@@ -128,8 +130,147 @@ class DataAccessObject
             else
             {
                 mysqli_close($this->conn);
-                return -1;
+                return - 1;
             }
+        }
+        catch (Exception $e)
+        {
+        }
+    }
+
+    public function getUserFromID($id)
+    {
+        try
+        {
+            $this->dbQuery = "SELECT * FROM user WHERE ID = '" . $id . "'";
+            $result = mysqli_query($this->conn, $this->dbQuery);
+            if (mysqli_num_rows($result) == 1)
+            {
+                $row = mysqli_fetch_assoc($result);
+                $username = $row['USERNAME'];
+                $password = $row['PASSWORD'];
+                $role = $row['ROLE'];
+                $user = new UserModel($id, $username, $password, $role);
+                mysqli_free_result($result);
+                mysqli_close($this->conn);
+                return $user;
+            }
+            else
+            {
+                mysqli_close($this->conn);
+                return - 1;
+            }
+        }
+        catch (Exception $e)
+        {
+        }
+    }
+
+    public function getAllUsers()
+    {
+        try
+        {
+            $this->dbQuery = "SELECT * FROM user";
+            $result = mysqli_query($this->conn, $this->dbQuery);
+            $users = array();
+            while ($row = mysqli_fetch_assoc($result))
+            {
+                $users[] = new UserModel($row['ID'], $row['USERNAME'], $row['PASSWORD'], $row['ROLE']);
+            }
+            mysqli_free_result($result);
+            mysqli_close($this->conn);
+            return $users;
+        }
+        catch (Exception $e)
+        {
+        }
+    }
+
+    public function updateUser(UserModel $user)
+    {
+        try
+        {
+
+            $this->dbQuery = "UPDATE user 
+                                SET USERNAME = '" . $user->getUsername() . "', PASSWORD = '" . $user->getPassword() . "', ROLE = '" . $user->getRole() . "' 
+                                WHERE ID = '" . $user->getID() . "'";
+            if (mysqli_query($this->conn, $this->dbQuery))
+            {
+                mysqli_close($this->conn);
+                return true;
+            }
+            else
+            {
+                mysqli_close($this->conn);
+                return false;
+            }
+        }
+        catch (Exception $e)
+        {
+        }
+    }
+
+    public function getUserFromUsername($username)
+    {
+        try
+        {
+            $this->dbQuery = "SELECT * FROM user WHERE USERNAME = '" . $username . "'";
+            $result = mysqli_query($this->conn, $this->dbQuery);
+            if (mysqli_num_rows($result) == 1)
+            {
+                $row = mysqli_fetch_assoc($result);
+                $id = $row['ID'];
+                $password = $row['PASSWORD'];
+                $role = $row['ROLE'];
+                $user = new UserModel($id, $username, $password, $role);
+                mysqli_free_result($result);
+                mysqli_close($this->conn);
+                return $user;
+            }
+            else
+            {
+                mysqli_close($this->conn);
+                return - 1;
+            }
+        }
+        catch (Exception $e)
+        {
+        }
+    }
+
+    public function addUserInfo(ProfileModel $userInfo)
+    {
+        try
+        {
+            $this->dbQuery = "INSERT INTO userinfo (EMAIL, PHONE, GENDER, NATIONALITY, DESCRIPTION, SKILLS, CERTIFICATIONS, USERID) 
+                                VALUES ('" . $userInfo->getEmail() . "', '" . $userInfo->getPhone() . "', '" . $userInfo->getGender() . "', '" . $userInfo->getNationality() . "', '" . $userInfo->getDescription() . "', '" . $userInfo->getSkills() . "', 
+                                '" . $userInfo->getCertifications() . "', '" . $userInfo->getUserID() . "')";
+            if (mysqli_query($this->conn, $this->dbQuery))
+            {
+                mysqli_close($this->conn);
+                return true;
+            }
+            else
+            {
+                echo mysqli_error($this->conn);
+                mysqli_close($this->conn);
+                return false;
+            }
+        }
+        catch (Exception $e)
+        {
+        }
+    }
+
+    public function deleteUser(UserModel $user)
+    {
+        try
+        {
+            $userID = $user->getID();
+            $this->dbQuery = "DELETE FROM user WHERE ID = '" . $userID . "'";
+            mysqli_query($this->conn, $this->dbQuery);
+            mysqli_close($this->conn);
+            return true;
         }
         catch (Exception $e)
         {

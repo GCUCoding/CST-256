@@ -2,8 +2,9 @@
 namespace App\Services\Business;
 
 use App\Services\Data\DataAccessObject;
+use Illuminate\Http\Request;
 
-class BusinessService
+class BusinessService 
 {
     private $dao;
     public function __construct()
@@ -11,9 +12,9 @@ class BusinessService
         $this->dao = new DataAccessObject();   
     }
     
-    public function AddUser($username, $password)
+    public function AddUser($user)
     {
-        return $this->dao->AddUser($username, $password);
+        return $this->dao->AddUser($user);
     }
     
     public function isUnique($username)
@@ -35,5 +36,36 @@ class BusinessService
     {
         return $this->dao->getUserRole($username);
     }
+    
+    public function getUserFromID($id)
+    {
+        return $this->dao->getUserFromID($id);
+    }
+    
+    public function getUserFromUsername($username)
+    {
+        return $this->dao->getUserFromUsername($username);
+    }
+    
+    public function getAllUsers()
+    {
+        return $this->dao->getAllUsers();
+    }
+    
+    public function updateUser($user)
+    {
+        return $this->dao->updateUser($user);
+    }
+    
+    public function addUserInfo($userInfo)
+    {
+        return $this->dao->addUserInfo($userInfo);
+    }
+    
+    public function deleteUser($user)
+    {
+        return $this->dao->deleteUser($user);
+    }
+    
 }
 

@@ -1,7 +1,6 @@
 <?php
 namespace App\Models;
 
-use App\Services\Business\BusinessService;
 
 class UserModel
 {
@@ -11,12 +10,12 @@ class UserModel
     private $password;
     private $role;
     
-    public function __construct(string $username, string $password)
+    public function __construct($id, string $username, string $password, $role)
     {
         $this->username = $username;
         $this->password = $password;
-        $this->id = $this->loadID();
-        $this->role = $this->loadRole();
+        $this->id = $id;
+        $this->role = $role;
     }
     
     public function getID()
@@ -34,17 +33,6 @@ class UserModel
     public function getRole()
     {
         return $this->role;
-    }
-    
-    public function loadID()
-    {
-        $this->businessService = new BusinessService();
-        $this->id = $this->businessService->getUserID($this->username);
-    }
-    public function loadRole()
-    {
-        $this->businessService = new BusinessService();
-        $this->role = $this->businessService->getUserRole($this->username);
     }
     
 }

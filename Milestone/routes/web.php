@@ -28,3 +28,24 @@ Route::get('/login', function()
 });
 
 Route::post('/logged', 'LoginController@index');
+
+Route::get('/logged', function()
+{
+    return view('security');
+}); 
+
+Route::post('/editUser', 'AdminController@editUser');
+
+Route::get('/editUser', function()
+{
+    return view();
+});
+
+Route::post('/editedUser', 'AdminController@confirmEditUser');
+
+Route::get('/editedUser', function()
+{
+    return view('security');
+});
+
+Route::post('/deleteUser', 'AdminController@deleteUser');
