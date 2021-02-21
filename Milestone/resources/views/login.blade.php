@@ -1,3 +1,4 @@
+<!-- login page -->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
 <html>
 <head>
@@ -5,25 +6,28 @@
 <title>Login</title>
 </head>
     <body>
+    <!-- shows layout -->
     @extends('layouts.appmaster')
 	@section('title', 'Login Page')
 	@section('content')
+	<div class="editForm">
+	<h2>Login to your account:</h2>
+	<!-- form to hold and pass login info to /logged route -->
 	<form action="logged" method="post">
 	<input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>">
-    <p>
     	<label for="username">Username</label>
     	<input type="text" name="username" id="username"></input>
+    	<!-- shows errors if username errors -->
     	<?php echo $errors->first('username')?>
-    </p>
-    <p>
+    	<br>
     	<label for="password">Password</label>
     	<input type="password" name="password" id="password"></input>
+    	<!-- shows errors if password errors -->
     	<?php echo $errors->first('password')?>
-    </p>
-    <p>
+    	<br>
     	<input type="submit" name="submitted" value="Submit"></input>
-    </p>
     </form>
+    </div>
     @endsection
     </body>
 </html>

@@ -4,12 +4,13 @@ namespace App\Models;
 
 class UserModel
 {
-    private $businessService;
+    //declares fields necessary for a User
     private $id;
     private $username;
     private $password;
     private $role;
     
+    //full-args constructor
     public function __construct($id, string $username, string $password, $role)
     {
         $this->username = $username;
@@ -18,6 +19,7 @@ class UserModel
         $this->role = $role;
     }
     
+    //getters(Model should be read-only
     public function getID()
     {
         return $this->id;

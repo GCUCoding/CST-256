@@ -15,6 +15,11 @@ Route::get('/', function ()
     return view('home');
 });
 
+Route::get('/home', function ()
+{
+    return view('home');
+});
+
 Route::get('/register', function () 
 {
     return view('registration');
@@ -29,10 +34,7 @@ Route::get('/login', function()
 
 Route::post('/logged', 'LoginController@index');
 
-Route::get('/logged', function()
-{
-    return view('security');
-}); 
+Route::get('/logged', 'LoginController@userAccess');
 
 Route::post('/editUser', 'AdminController@editUser');
 
@@ -49,3 +51,11 @@ Route::get('/editedUser', function()
 });
 
 Route::post('/deleteUser', 'AdminController@deleteUser');
+
+Route::post('/editedUserInfo', 'CustomerController@editUserInfo');
+
+Route::post('/editUserProfile', 'AdminController@editUserProfile');
+
+Route::post('/editedUserProfile', 'AdminController@editedUserProfile');
+
+Route::get('/logout', 'LoginController@Logout');

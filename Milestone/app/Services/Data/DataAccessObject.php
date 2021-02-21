@@ -5,9 +5,11 @@ use Carbon\Exceptions\Exception;
 use App\Models\ProfileModel;
 use App\Models\UserModel;
 
+//provides access to a database
 class DataAccessObject
 {
 
+    //declares fields necessary for a database connection
     private $conn;
 
     private $servername = "localhost";
@@ -20,11 +22,13 @@ class DataAccessObject
 
     private $dbQuery;
 
+    //no-args contructor creates a connection with the database
     public function __construct()
     {
-        $this->conn = mysqli_connect($this->servername, $this->username, $this->password, $this->dbName, $this->dbQuery);
+        $this->conn = mysqli_connect($this->servername, $this->username, $this->password, $this->dbName);
     }
 
+    //checks the data in the database to ensure that a provided username is unique
     public function isUnique($username)
     {
         try
@@ -46,6 +50,7 @@ class DataAccessObject
         }
     }
 
+    //attempts to add a user to the database
     public function AddUser(UserModel $user)
     {
         try
@@ -67,6 +72,7 @@ class DataAccessObject
         }
     }
 
+    //authenticates whether a user attempting to sign in is valid
     public function Authenticate($username, $password)
     {
         try
@@ -90,6 +96,7 @@ class DataAccessObject
         }
     }
 
+    //returns the user ID of a user in the database given the username
     public function getUserID($username)
     {
         try
@@ -114,6 +121,7 @@ class DataAccessObject
         }
     }
 
+    //returns a user's role given their username
     public function getUserRole($username)
     {
         try
@@ -138,6 +146,7 @@ class DataAccessObject
         }
     }
 
+    //gets a user given a user's ID
     public function getUserFromID($id)
     {
         try
@@ -166,6 +175,7 @@ class DataAccessObject
         }
     }
 
+    //gets all users in the user's database and returns them in the form of an array
     public function getAllUsers()
     {
         try
@@ -186,6 +196,7 @@ class DataAccessObject
         }
     }
 
+    //updates a user in the database given a UserModel object
     public function updateUser(UserModel $user)
     {
         try
@@ -210,6 +221,7 @@ class DataAccessObject
         }
     }
 
+    //gets a user from the database given a username and returns a corresponding UserModel object
     public function getUserFromUsername($username)
     {
         try
@@ -238,6 +250,7 @@ class DataAccessObject
         }
     }
 
+    //adds a user's UserInfo into the userinfo table, given a foreign key within a ProfileModel object
     public function addUserInfo(ProfileModel $userInfo)
     {
         try
@@ -262,6 +275,7 @@ class DataAccessObject
         }
     }
 
+    //deletes a user from the database given a UserModel object
     public function deleteUser(UserModel $user)
     {
         try
@@ -271,6 +285,68 @@ class DataAccessObject
             mysqli_query($this->conn, $this->dbQuery);
             mysqli_close($this->conn);
             return true;
+        }
+        catch (Exception $e)
+        {
+        }
+    }
+    
+    //gets a user's profile information given a UserModel object
+    //returns a ProfileModel object
+    public function getUserInfo(UserModel $user)
+    {
+        $userID = $user->getID();
+        try
+        {
+            $this->dbQuery = "SELECT * FROM userinfo WHERE USERID = '" . $userID . "'";
+            $result = mysqli_query($this->conn, $this->dbQuery);
+            if (mysqli_num_rows($result) == 1)
+            {
+                $row = mysqli_fetch_assoc($result);
+                $id = $row['ID'];
+                $email = $row['EMAIL'];
+                $phone = $row['PHONE'];
+                $gender = $row['GENDER'];
+                $nationality = $row['NATIONALITY'];
+                $description = $row['DESCRIPTION'];
+                $skills = $row['SKILLS'];
+                $certifications = $row['CERTIFICATIONS'];
+                $userInfo = new ProfileModel($id, $email, $phone, $gender, $nationality, $description, $skills, $certifications, $userID);
+                mysqli_free_result($result);
+                mysqli_close($this->conn);
+                return $userInfo;
+            }
+            else
+            {
+                mysqli_close($this->conn);
+                return - 1;
+            }
+        }
+        catch (Exception $e)
+        {
+        }
+    }
+    
+    //updates a user's profile information based on a given ProfileModel object
+    public function updateUserInfo(ProfileModel $userInfo)
+    {
+        try
+        {
+            
+            $this->dbQuery = "UPDATE userinfo
+                                SET EMAIL = '" . $userInfo->getEmail() . "', PHONE = '" . $userInfo->getPhone() . "', GENDER = '" . $userInfo->getGender() . "', NATIONALITY = '" . $userInfo->getNationality() . 
+                                "', DESCRIPTION = '" . $userInfo->getDescription() . "', SKILLS = '" . $userInfo->getSkills() . "', CERTIFICATIONS = '" . $userInfo->getCertifications() . "'
+                                WHERE ID = '" . $userInfo->getID() . "'";
+            if(mysqli_query($this->conn, $this->dbQuery))
+            {
+                mysqli_close($this->conn);
+                return true;
+            }
+            else
+            {
+                mysqli_close($this->conn);
+                return false;
+            }
         }
         catch (Exception $e)
         {
