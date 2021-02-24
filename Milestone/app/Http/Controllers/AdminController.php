@@ -33,14 +33,8 @@ class AdminController extends Controller
         /*validates information submitted through the form, currently breaks everything so not trying it*/
         //$this->validateForm($request);
         
-        //initializes new business service 
-        $this->businessService = new BusinessService();
-        
         //updates a user based on the information provided through the form
         $this->businessService->updateUser(new UserModel($request->input('id'), $request->input('username'), $request->input('password'), $request->input('roles')));
-        
-        //initializes new business service to reopen connection
-        $this->businessService = new BusinessService();
         
         //gets all users from the database for display purposes and sends the data to a view
         $users = $this->businessService->getAllUsers();
@@ -58,14 +52,8 @@ class AdminController extends Controller
         //gets user based on the provided ID
         $user = $this->businessService->getUserFromID($request->input('id'));
         
-        //initializes new business service to reopen connection
-        $this->businessService = new BusinessService();
-        
         //deletes a user based on the given user model
         $this->businessService->deleteUser($user);
-        
-        //initializes new business service to reopen connection
-        $this->businessService = new BusinessService();
         
         //gets all users from the database for display purposes and sends the data to a view
         $users = $this->businessService->getAllUsers();
@@ -93,9 +81,6 @@ class AdminController extends Controller
         //gets user based on the provided ID
         $user = $this->businessService->getUserFromID($request->input('id'));
         
-        //initializes new business service to reopen connection
-        $this->businessService = new BusinessService();
-        
         //gets user profile info and sends it to a view
         $userInfo = $this->businessService->getUserInfo($user);
         $data = ['userInfo' => $userInfo];
@@ -114,9 +99,6 @@ class AdminController extends Controller
         
         //updates the user's info based on the ProfileModel provided
         $this->businessService->updateUserInfo($userInfo);
-        
-        //initializes new business service to reopen connection
-        $this->businessService = new BusinessService();
         
         //gets all users from the database for display purposes and sends the data to a view
         $users = $this->businessService->getAllUsers();

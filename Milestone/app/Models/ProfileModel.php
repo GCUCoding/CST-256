@@ -74,5 +74,6 @@ class ProfileModel
     {
         return $this->userID;
     }
+    
 }
 ?>

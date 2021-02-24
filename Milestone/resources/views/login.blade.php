@@ -14,7 +14,7 @@
 	<h2>Login to your account:</h2>
 	<!-- form to hold and pass login info to /logged route -->
 	<form action="logged" method="post">
-	<input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>">
+	{{ csrf_field() }}
     	<label for="username">Username</label>
     	<input type="text" name="username" id="username"></input>
     	<!-- shows errors if username errors -->

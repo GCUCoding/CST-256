@@ -30,9 +30,6 @@ class LoginController extends Controller
         if($this->businessService->Authenticate($username, $password))
         {
             
-            //initializes a new BusinessService object to reestablish connection
-            $this->businessService = new BusinessService();
-            
             //gets a UserModel object from the database with the corresponding 
             $user = $this->businessService->getUserFromUsername($username);
 
@@ -56,7 +53,6 @@ class LoginController extends Controller
             //returns the admin view if the user is an admin or has extended permissions
             if($user->getRole() == 1 || $user->getRole() == 2)
             {
-                $this->businessService = new BusinessService();
                 $users = $this->businessService->getAllUsers();
                 $data = ['users' => $users];
                 return view('Admin/users')->with($data);
@@ -69,7 +65,6 @@ class LoginController extends Controller
             //returns the customer view for customers
             else 
             {
-                $this->businessService = new BusinessService();
                 $userInfo = $this->businessService->getUserInfo($user);
                 $data = ['userInfo' => $userInfo];
                 return view('Customer/userProfile')->with($data);
@@ -103,13 +98,20 @@ class LoginController extends Controller
         {
             $this->businessService = new BusinessService();
             $user = $this->businessService->getUserFromID(session('userID'));
-            $this->businessService = new BusinessService();
             $userInfo = $this->businessService->getUserInfo($user);
             $data = ['userInfo' => $userInfo];
             return view('Customer/userProfile')->with($data);
         }
     }
     
+    public function profile(Request $request)
+    {
+        $this->businessService = new BusinessService();
+        $user = $this->businessService->getUserFromID(session('userID'));
+        $userInfo = $this->businessService->getUserInfo($user);
+        $data = ['userInfo' => $userInfo];
+        return view('Customer/userProfile')->with($data);
+    }
     //logs user out and destroys the session
     public function logout()
     {

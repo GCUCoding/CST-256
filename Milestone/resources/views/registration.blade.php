@@ -14,7 +14,7 @@
 	<!-- form that allows the user to register themselves -->
 	<h2>Register for an account:</h2>
 	<form action="registered" method="post">
-	<input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>">
+	{{ csrf_field() }}
     	<label for="username">Username</label>
     	<input type="text" name="username" id="username"></input>
     	<?php echo $errors->first('username')?>

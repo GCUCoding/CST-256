@@ -25,14 +25,10 @@ class CustomerController extends Controller
         //updates the user info based on the profile information provided
         $this->businessService->updateUserInfo($userInfo);
         
-        //initializes a new BusinessService in order to reopen the connection
-        $this->businessService = new BusinessService();
         
         //gets a user based on the userInfo provided in order to get new, updated user info
         $user = $this->businessService->getUserFromID($userInfo->getUserID());
         
-        //initializes a new BusinessService in order to reopen the connection
-        $this->businessService = new BusinessService();
         
         //gets updated user info and returns the new profile
         $userInfo = $this->businessService->getUserInfo($user);

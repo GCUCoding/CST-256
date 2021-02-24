@@ -53,8 +53,19 @@
     	<input type="hidden" name="id" value="<?php echo $id;?>"></input>
     	<input type="hidden" name="userID" value="<?php echo $userID;?>"></input>
     	<input type="submit" name="submission" value="Edit User"></input>
-    </form>
-    </div>
+    	</form>
+    	<form action="education" method="post">
+    	{{ csrf_field() }}
+    			<input type="hidden" name="profileID" value="<?php echo $id;?>"></input>
+    			<input type="submit" name="submitted" value="View/Edit Education"></input>
+    	</form>
+    	</form>
+    	<form action="jobHistory" method="post">
+    	{{ csrf_field() }}
+    			<input type="hidden" name="profileID" value="<?php echo $id;?>"></input>
+    			<input type="submit" name="submitted" value="View/Edit Job History"></input>
+    	</form>
+    	</div>
     @endsection
     </body>
 </html>

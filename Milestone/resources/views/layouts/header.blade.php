@@ -24,7 +24,9 @@ font-family: Brush Script MT, cursive;">Welcome to Linked Out</h2>
     <!-- <li><a href="register" style="text-align:center;align:center;">Register</a></li> -->
     <!-- <li><a href="login" style="text-align:center;align:center;">Login</a></li> -->
   <li><a href="logged" class="button">View/Edit Users</a></li>
+  <li><a href="adminProfile" class="button" style="float: right;">Profile</a></li>
   <li><a href="logout" class="button">Log Out</a></li>
+  <li><a href="jobs" class="button">View Job Listings</a>
 </ul>
 <br>
 <h2 style="
@@ -35,9 +37,10 @@ font-family: Brush Script MT, cursive;">Welcome to Linked Out</h2>
 <!-- Base user -->
 @elseif(session('role') == 3)
 <ul>
-  	<li><a href="home" class="button">Home</a></li>
+  	 <li><a href="home" class="button">Home</a></li>
   	 <li><a href="logged" class="button">Profile</a></li>
   	 <li><a href="logout" class="button">Log Out</a></li>
+  	 <li><a href="jobs" class="button">View Job Listings</a>
 </ul>
 
 <!-- catch all = not logged in case -->

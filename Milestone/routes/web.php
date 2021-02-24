@@ -59,3 +59,35 @@ Route::post('/editUserProfile', 'AdminController@editUserProfile');
 Route::post('/editedUserProfile', 'AdminController@editedUserProfile');
 
 Route::get('/logout', 'LoginController@Logout');
+
+Route::post('/education', 'EducationController@index');
+
+Route::post('/editEducation', 'EducationController@edit');
+
+Route::get('/adminProfile', 'LoginController@profile');
+
+Route::get('/jobs', 'JobListingController@index');
+
+Route::post('/addJob', 'JobListingController@addJobPage');
+
+Route::post('/newJob', 'JobListingController@createNewJob');
+
+Route::post('/viewJob', 'JobListingController@viewJobDetails');
+
+Route::post('/editJob', 'JobListingController@editJobListing');
+
+Route::post('/editJobPage', 'JobListingController@viewEditPage');
+
+Route::post('/jobHistory', 'JobHistoryController@index');
+
+Route::post('/addJobHistory', 'JobHistoryController@addJobHistory');
+
+Route::post('newJobHistory', 'JobHistoryController@createJobHistory');
+
+Route::post('/editJobHistoryPage', 'JobHistoryController@jobHistoryEditPage');
+
+Route::post('/viewJobHistory', 'JobHistoryController@viewJobHistoryDetails');
+
+Route::post('/editJobHistory', 'JobHistoryController@editJobHistory');
+
+?>

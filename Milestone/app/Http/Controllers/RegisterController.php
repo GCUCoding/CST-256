@@ -6,6 +6,7 @@ use App\Services\Business\BusinessService;
 use Illuminate\Http\Request;
 use App\Models\UserModel;
 use App\Models\ProfileModel;
+use App\Models\EducationModel;
 
 //handles user registration
 class RegisterController extends Controller
@@ -32,15 +33,11 @@ class RegisterController extends Controller
         //attempts to register a new user
         if($this->businessService->AddUser($user))
         {
-            //initializes a new BusinessService object in order to reestablish database connection
-            $this->businessService = new BusinessService();
-            
+
             //overwrites the UserModel with its equivalent from the database
             $user = $this->businessService->getUserFromUsername($username);
             
-            //initializes a new BusinessService object in order to reestablish database connection
-            $this->businessService = new BusinessService();
-            
+
             //gets the user ID from the new user 
             $userID = $user->getID();
             
@@ -49,6 +46,17 @@ class RegisterController extends Controller
             
             //adds the user's userinfo to the database
             $this->businessService->addUserInfo($userInfo);
+
+            //gets the new ProfileModel from the database
+            $userInfo = $this->businessService->getUserInfo($user);
+            
+            $userInfoID = $userInfo->getID();
+
+            //creates a new EducationModel object with the user info's ID to be used as a foreign key
+            $education = new EducationModel(null, null, null, null, 0.00, null, $userInfoID);
+
+            //adds the user's education to the database
+            $this->businessService->addEducation($education);
             
             //effectively logs user in
             if(null == session('userID'))
