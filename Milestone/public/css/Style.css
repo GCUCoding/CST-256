@@ -1,0 +1,103 @@
+<!--CSS-->
+
+*
+{
+	padding: 5px;
+}
+
+body
+{
+	background-image: url("pictures/LinkedOutBG.png");
+}
+
+input
+{
+	border: 2px solid #000099; /* dark blue */
+	padding: 5px;
+}
+
+label
+{
+	padding: 5px;
+}
+
+ul 
+{
+	color: white;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #000099; /* dark blue */
+}
+
+li 
+{
+	display: inline;
+	float: left;
+	padding: 8px;
+}
+
+.button 
+{
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.button:hover 
+{
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA; /* mid-shade of blue */
+}
+
+.usersTable
+{
+	text-align: center;
+	background-color: white;
+	color: black;
+	border: 2px solid #008CBA; /* mid-shade of blue */
+	width: 50%;
+}
+
+tr:nth-child(even)
+{
+	background-color: #99c2ff; /* light blue */
+}
+
+tr:hover 
+{
+	background-color: #e6f0ff; /* super-light blue */
+}
+
+th 
+{
+	padding: 5px;
+  	padding-top: 12px;
+  	padding-bottom: 12px;
+  	text-align: center;
+ 	background-color: #000099; /* dark blue */
+ 	color: white;
+}
+
+td
+{
+	border: 1px solid #e6f0ff; /* super-light blue */
+  	padding: 8px;
+}
+
+.editForm
+{
+	padding: 10px;
+	text-align: center;
+	background-color: white;
+	color: black;
+	border: 10px solid #000099; /* dark blue */
+	width: 30%;
+	
+}

@@ -1,0 +1,253 @@
+<?php
+namespace App\Services\Business;
+
+use App\Services\Data\DataAccessObject;
+use Illuminate\Http\Request;
+
+//creates a class to be used for business logic
+class BusinessService 
+{
+    //declares a field to hold a DatabaseAccessObject
+    private $dao;
+    
+    /*====================================================================================================================
+     *USER STUFF
+     *====================================================================================================================*/
+    //tells database to attempt to add a user(registration)
+    public function AddUser($user)
+    {
+        $this->dao = new DataAccessObject();
+        //returns a boolean to show success
+        return $this->dao->AddUser($user);
+    }
+    
+    //asks database to test if a user is unique
+    public function isUnique($username)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->isUnique($username);
+    }
+    
+    //asks database to check whether a username and password are unique
+    public function Authenticate($username, $password)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->Authenticate($username, $password);
+    }
+    
+    //asks the database to return the ID of a user given the username
+    public function getUserID($username)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getUserID($username);
+    }
+    
+    //asks the database to return the Role of a user given the username
+    public function getUserRole($username)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getUserRole($username);
+    }
+    
+    //returns a user in the form of a UserModel object given the user's ID
+    public function getUserFromID($id)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getUserFromID($id);
+    }
+    
+    //returns a user in the form of a UserModel given the user's username
+    public function getUserFromUsername($username)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getUserFromUsername($username);
+    }
+    
+    //returns all users in the form of a list of UserModel objects
+    public function getAllUsers()
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getAllUsers();
+    }
+    
+    //updates a user in the database after being given a UserModel
+    public function updateUser($user)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->updateUser($user);
+    }
+    
+    //asks the database to delete a user given a corresponding UserModel object
+    public function deleteUser($user)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->deleteUser($user);
+    }
+    
+    /*====================================================================================================================
+     *PROFILE STUFF
+     *====================================================================================================================*/
+    //asks the database to update a user's info given a ProfileModel object
+    public function addUserInfo($userInfo)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->addUserInfo($userInfo);
+    }
+    
+    //asks the database to provide a user's profile information given the corresponding UserModel object
+    public function getUserInfo($user)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getUserInfo($user);
+    }
+    
+    //asks the database to update a user's profile information given a ProfileModel object
+    public function updateUserInfo($userInfo)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->updateUserInfo($userInfo);
+    }
+    
+    //asks the database to provide a user's profile information given a profile ID
+    public function getUserInfoFromID($profileID)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getUserInfoFromID($profileID);
+    }
+    
+    /*====================================================================================================================
+     *EDUCATION STUFF
+     *====================================================================================================================*/
+    //asks the database to add an education given a EducationModel object
+    public function addEducation($education)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->addEducation($education);
+    }
+    
+    //asks the database to provide an education based on a given EducationModel object
+    public function getEducation($education)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getEducation($education);
+    }
+    
+    //asks the database to update an education based on a given EducationModel object
+    public function updateEducation($education)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->updateEducation($education);
+    }
+    
+    //asks the database to delete an education from the database based on a give EducationModel object
+    public function deleteEducation($education)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->deleteEducation($education);
+    }
+    
+    //asks the database to provide education(s) based on a given ProfileModel object
+    public function getEducationFromProfile($userInfo)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getEducationFromProfile($userInfo);
+    }
+    
+    /*====================================================================================================================
+     *JOBLISTING STUFF
+     *====================================================================================================================*/
+    //asks the database to add a job listing based on a given JobListingModel object
+    public function addJobListing($jobListing)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->addJobListing($jobListing);
+    }
+    
+    //asks the database to provide a job listing based on a given JobListingModel object
+    public function getJobListing($jobListing)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getJobListing($jobListing);
+    }
+    
+    //asks the database to provide all job listings
+    public function getAllJobListings()
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getAllJobListings();
+    }
+    
+    //asks the database to update a job listing based on a given JobListingModel object
+    public function updateJobListing($jobListing)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->updateJobListing($jobListing);
+    }
+    
+    //asks the database to provide all active job listings
+    public function getActiveJobListings()
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getActiveJobListings();
+    }
+    
+    //asks the database to provide all inactive job listings
+    public function getInactiveJobListings()
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getInactiveJobListings();
+    }
+ 
+    //asks the database to get a job listing based on a given job listing ID
+    public function getJobListingFromID($jobListingID)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getJobListingFromID($jobListingID);
+    }
+    
+    /*====================================================================================================================
+     *JOBHISTORY STUFF
+     *====================================================================================================================*/
+    //asks the database to add a job history based on a given JobHistoryModel object
+    public function addJobHistory($jobHistory)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->addJobHistory($jobHistory);
+    }
+    
+    //asks the database to provide a single job history based on a given JobHistoryModel object
+    public function getJobHistory($jobHistory)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getJobHistory($jobHistory);
+    }
+    
+    //asks the database to update a jobHistory object based on the 
+    public function updateJobHistory($jobHistory)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->updateJobHistory($jobHistory);
+    }
+    
+    //asks the database to delete a job history based on a given JobHistoryModel object
+    public function deleteJobHistory($jobHistory)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->deleteJobHistory($jobHistory);
+    }
+    
+    //asks the database to get a user's complete job history based on a given ProfileModel object
+    public function getJobHistoryFromUserInfo($userInfo)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getJobHistoryFromUserInfo($userInfo);
+    }
+    
+    //asks the database to provide a single job history based on a given job history ID
+    public function getJobHistoryFromID($jobHistoryID)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getJobHistoryFromID($jobHistoryID);
+    }
+}
+
