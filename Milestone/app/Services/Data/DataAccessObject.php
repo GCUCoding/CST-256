@@ -11,7 +11,6 @@ use App\Models\JobHistoryModel;
 //provides access to a database
 class DataAccessObject
 {
-
     //declares fields necessary for a database connection
     private $conn;
 
@@ -24,6 +23,7 @@ class DataAccessObject
     private $dbName = "Milestone";
 
     private $dbQuery;
+
 
     //no-args contructor creates a connection with the database
     public function __construct()
@@ -55,6 +55,7 @@ class DataAccessObject
         {
         }
     }
+
 
     //attempts to add a user to the database
     public function AddUser(UserModel $user)
@@ -979,6 +980,5 @@ class DataAccessObject
         {
         }
     }
-
 }
 
