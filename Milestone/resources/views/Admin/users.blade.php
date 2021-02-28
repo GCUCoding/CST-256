@@ -1,3 +1,4 @@
+<!-- The purpose of this page is to display users in an easy-to-understand format and allow admins to select and edit users/user information -->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
 <html>
 <head>
@@ -5,11 +6,11 @@
 <title>All Users</title>
 </head>
     <body>
-    	
+    <!-- use layours -->
     	@extends('layouts.appmaster')
 		@section('title', 'Login Page')
 		@section('content')
-		<h3>Admin Page Test</h3>
+		<!-- table headers set up to hold users -->
     	<table class="usersTable">
         	<tr>
         		<th>ID: </th>
@@ -19,14 +20,17 @@
         		<th>Edit: </th>
     			<th>Delete: </th>
         	</tr>
+        <!-- foreach loop to populate users table -->
     	@foreach($users as $user)
     	<?php 
+    	//declare variables for each user to be used in the table
     	$id = $user->getID();
     	$username = $user->getUsername();
     	$password = $user->getPassword();
     	$role = $user->getRole();
     	?>
         	<tr>
+        	<!-- display user data and include buttons for editing and deleting users -->
         		<td><?php echo $id;?></td>
         		<td><?php echo $username;?></td>
         		<td><?php echo $password;?></td>
@@ -43,7 +47,7 @@
         		</td>
         	</tr>
     	@endforeach
-    	</table>
+		</table>
     	@endsection
     </body>
 </html>

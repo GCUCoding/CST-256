@@ -1,3 +1,4 @@
+<!-- footer w/inline css -->
 <h5
 style="
 align-content: center; 
