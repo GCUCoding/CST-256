@@ -28,6 +28,7 @@ font-family: Brush Script MT, cursive;">Welcome to Linked Out</h2>
   	<li><a href="jobs" class="button">View Job Listings</a>
   	<li><a href="groups" class="button">Groups</a>
   	<li><a href="logout" class="button">Log Out</a></li>
+
 </ul>
 <br>
 <h2 style="
@@ -43,6 +44,7 @@ font-family: Brush Script MT, cursive;">Welcome to Linked Out</h2>
   	 <li><a href="jobs" class="button">View Job Listings</a>
   	 <li><a href="groups" class="button">Groups</a>
   	 <li><a href="logout" class="button">Log Out</a></li>
+
 </ul>
 
 <!-- catch all = not logged in case -->
