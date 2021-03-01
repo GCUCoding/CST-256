@@ -324,6 +324,7 @@ class BusinessService
         $this->dao = new DataAccessObject();
         return $this->dao->getGroupMember($groupMember);
     }
+   
     
     //asks the database to update a jobHistory object based on the
     public function updateGroupMember($group)

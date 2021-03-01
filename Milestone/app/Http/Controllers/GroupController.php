@@ -66,7 +66,24 @@ class GroupController extends Controller
         $group = $this->businessService->getGroupFromID($request->input('id'));
         $user = $this->businessService->getUserFromID($request->input('userID'));
         $groupMembers = $this->businessService->getGroupMembersFromGroupID($group->getID());
-        $data = ['groupMembers' => $groupMembers, 'user' => $user];
+        $isAdminOrLeader = 0;
+        $isInGroup = 0;
+        foreach($groupMembers as $groupMember)
+        {
+            if($groupMember->getUserID() == $user->getID())
+            {
+                $isInGroup = 1;
+            }
+            if($groupMember->getUserID() == $user->getID() && $groupMember->getIsAdminOrLeader() == 1)
+            {
+                $isAdminOrLeader = 1;
+            }
+        }
+        if(session('role') == 1)
+        {
+            $isAdminOrLeader = 1;
+        }
+        $data = ['groupMembers' => $groupMembers, 'user' => $user, 'isAdminOrLeader' => $isAdminOrLeader, 'isInGroup' => $isInGroup];
         return view('Groups/groupDetails')->with($data);
     }
     
