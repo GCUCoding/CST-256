@@ -20,7 +20,6 @@
     $schedule = $jobListing->getSchedule();
     $pay = $jobListing->getPay();
     $active = $jobListing->getActive();
-    echo $title;
 ?>
     <div class="editForm">
     <!-- Form used to represent the data held in the database in an editable manner so it can be updated -->

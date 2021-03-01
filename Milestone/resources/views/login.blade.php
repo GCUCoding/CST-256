@@ -25,7 +25,7 @@
     	<!-- shows errors if password errors -->
     	<?php echo $errors->first('password')?>
     	<br>
-    	<input type="submit" name="submitted" value="Submit"></input>
+    	<input class="button" type="submit" name="submitted" value="Login"></input>
     </form>
     </div>
     @endsection
