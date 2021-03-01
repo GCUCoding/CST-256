@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Services\Business\BusinessService;
 use App\Models\ProfileModel;
 
-
 //enables users to edit their own data
 class CustomerController extends Controller
 {
