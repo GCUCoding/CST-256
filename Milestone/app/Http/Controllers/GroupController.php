@@ -83,7 +83,9 @@ class GroupController extends Controller
         {
             $isAdminOrLeader = 1;
         }
-        $data = ['groupMembers' => $groupMembers, 'user' => $user, 'isAdminOrLeader' => $isAdminOrLeader, 'isInGroup' => $isInGroup];
+
+        $data = ['group' => $group, 'groupMembers' => $groupMembers, 'user' => $user, 'isAdminOrLeader' => $isAdminOrLeader, 'isInGroup' => $isInGroup];
+
         return view('Groups/groupDetails')->with($data);
     }
     

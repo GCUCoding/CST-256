@@ -98,4 +98,6 @@ Route::post('/newGroup', 'GroupController@newGroup');
 
 Route::post('/editGroup', 'GroupController@editGroup');
 
+Route::post('/viewGroup', 'GroupController@viewGroup');
+
 ?>

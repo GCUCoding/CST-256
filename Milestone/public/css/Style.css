@@ -63,6 +63,7 @@ li
 	color: black;
 	border: 2px solid #008CBA; /* mid-shade of blue */
 	width: 50%;
+	margins: auto;
 }
 
 tr:nth-child(even)
@@ -94,7 +95,7 @@ td
 .editForm
 {
 	padding: 10px;
-	text-align: center;
+	/* text-align: center; */
 	background-color: white;
 	color: black;
 	border: 10px solid #000099; /* dark blue */

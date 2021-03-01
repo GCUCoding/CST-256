@@ -25,9 +25,10 @@ font-family: Brush Script MT, cursive;">Welcome to Linked Out</h2>
     <!-- <li><a href="login" style="text-align:center;align:center;">Login</a></li> -->
   	<li><a href="logged" class="button">View/Edit Users</a></li>
   	<li><a href="adminProfile" class="button" style="float: right;">Profile</a></li>
-  	<li><a href="logout" class="button">Log Out</a></li>
   	<li><a href="jobs" class="button">View Job Listings</a>
   	<li><a href="groups" class="button">Groups</a>
+  	<li><a href="logout" class="button">Log Out</a></li>
+
 </ul>
 <br>
 <h2 style="
@@ -40,9 +41,10 @@ font-family: Brush Script MT, cursive;">Welcome to Linked Out</h2>
 <ul>
   	 <li><a href="home" class="button">Home</a></li>
   	 <li><a href="logged" class="button">Profile</a></li>
-  	 <li><a href="logout" class="button">Log Out</a></li>
   	 <li><a href="jobs" class="button">View Job Listings</a>
   	 <li><a href="groups" class="button">Groups</a>
+  	 <li><a href="logout" class="button">Log Out</a></li>
+
 </ul>
 
 <!-- catch all = not logged in case -->
