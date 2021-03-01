@@ -3,6 +3,7 @@ namespace App\Models;
 
 class ProfileModel
 {
+    
     //declares variables to hold the necessary information for a user profile
     private $id;
     private $email;
@@ -13,7 +14,7 @@ class ProfileModel
     private $skills;
     private $certifications;
     private $userID;
-
+    
     //full-args constructor
     public function __construct($id, $email, $phone, $gender, $nationality, $description, $skills, $certifications, $userID)
     {
@@ -73,5 +74,6 @@ class ProfileModel
     {
         return $this->userID;
     }
+    
 }
 ?>

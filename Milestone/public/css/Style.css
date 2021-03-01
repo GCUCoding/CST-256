@@ -38,13 +38,7 @@ li
 	padding: 8px;
 }
 
-input type="submit"
-{
-	border: 2px solid #000099;
-	font-weight: 500;
-}
-
-.navbutton 
+.button 
 {
   border: none;
   color: white;
@@ -55,7 +49,7 @@ input type="submit"
   font-size: 16px;
 }
 
-.navbutton:hover 
+.button:hover 
 {
   background-color: white;
   color: black;
@@ -69,6 +63,7 @@ input type="submit"
 	color: black;
 	border: 2px solid #008CBA; /* mid-shade of blue */
 	width: 50%;
+	margins: auto;
 }
 
 tr:nth-child(even)
@@ -99,10 +94,11 @@ td
 
 .editForm
 {
-	padding: 20px;
-	text-align: center;
+	padding: 10px;
+	/* text-align: center; */
 	background-color: white;
 	color: black;
 	border: 10px solid #000099; /* dark blue */
 	width: 30%;
+	
 }

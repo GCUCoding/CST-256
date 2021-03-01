@@ -20,7 +20,6 @@
 		<!-- table headers set up to hold users -->
     	<table class="usersTable">
         	<tr>
-        		<th>ID: </th>
         		<th>Title: </th>
         		<th>Company: </th>
         		<th>Position: </th>
@@ -48,7 +47,6 @@
     	?>
         	<tr>
         	<!-- display user data and include buttons for editing and deleting users -->
-        		<td><?php echo $id;?></td>
         		<td><?php echo $title;?></td>
         		<td><?php echo $company;?></td>
         		<td><?php echo $position;?></td>

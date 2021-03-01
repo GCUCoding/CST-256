@@ -249,5 +249,115 @@ class BusinessService
         $this->dao = new DataAccessObject();
         return $this->dao->getJobHistoryFromID($jobHistoryID);
     }
+
+    /*====================================================================================================================
+     *GROUP STUFF
+     *====================================================================================================================*/
+    //asks the database to add a job history based on a given JobHistoryModel object
+    public function addGroup($group)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->addGroup($group);
+    }
+    
+    //asks the database to provide a single job history based on a given JobHistoryModel object
+    public function getGroup($group)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getGroup($group);
+    }
+
+    //asks the database to provide a single job history based on a given JobHistoryModel object
+    public function getGroupFromTitle($groupTitle)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getGroupFromTitle($groupTitle);
+    }
+    
+    //asks the database to update a jobHistory object based on the
+    public function updateGroup($group)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->updateGroup($group);
+    }
+    
+    //asks the database to delete a job history based on a given JobHistoryModel object
+    public function deleteGroup($group)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->deleteGroup($group);
+    }
+    
+    //asks the database to get a user's complete job history based on a given ProfileModel object
+    public function getGroupFromUserID($userID)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getGroupFromUserInfo($userID);
+    }
+    
+    //asks the database to provide a single job history based on a given job history ID
+    public function getGroupFromID($groupID)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getGroupFromID($groupID);
+    }
+
+    public function getAllGroups()
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getAllGroups();
+    }
+    
+    /*====================================================================================================================
+     *GROUP MEMBER STUFF
+     *====================================================================================================================*/
+    //asks the database to add a job history based on a given JobHistoryModel object
+    public function addGroupMember($groupMember)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->addGroupMember($groupMember);
+    }
+    
+    //asks the database to provide a single job history based on a given JobHistoryModel object
+    public function getGroupMember($groupMember)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getGroupMember($groupMember);
+    }
+   
+    
+    //asks the database to update a jobHistory object based on the
+    public function updateGroupMember($group)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->updateGroupMember($group);
+    }
+    
+    //asks the database to delete a job history based on a given JobHistoryModel object
+    public function deleteGroupMember($groupMember)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->deleteGroupMember($groupMember);
+    }
+    
+    //asks the database to get a user's complete job history based on a given ProfileModel object
+    public function getGroupMembersFromGroupID($groupID)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getGroupMembersFromGroupID($groupID);
+    }
+    
+    //asks the database to provide a single job history based on a given job history ID
+    public function getGroupMemberFromID($groupMemberID)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getGroupMemberFromID($groupMemberID);
+    }
+    
+    public function getNumOfGroupMembers($group)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getNumOfGroupMembers($group);
+    }
 }
 
