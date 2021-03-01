@@ -90,4 +90,12 @@ Route::post('/viewJobHistory', 'JobHistoryController@viewJobHistoryDetails');
 
 Route::post('/editJobHistory', 'JobHistoryController@editJobHistory');
 
+Route::get('/groups', 'GroupController@index');
+
+Route::post('/addGroup', 'GroupController@addGroup');
+
+Route::post('/newGroup', 'GroupController@newGroup');
+
+Route::post('/editGroup', 'GroupController@editGroup');
+
 ?>

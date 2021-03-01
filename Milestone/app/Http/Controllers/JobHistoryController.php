@@ -57,4 +57,12 @@ class JobHistoryController extends Controller
         $data = ['jobHistories' => $jobHistories];
         return view('JobHistory/jobHistory')->with($data);
     }
+    
+    public function viewJobHistoryDetails(Request $request)
+    {
+        $this->businessService = new BusinessService();
+        $jobHistory = $this->businessService->getJobHistoryFromID($request->input('id'));
+        $data = ['jobHistory' => $jobHistory];
+        return view('JobHistory/jobHistoryDetails')->with($data);
+    }
 }
