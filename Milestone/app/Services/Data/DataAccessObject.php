@@ -2,19 +2,16 @@
 namespace App\Services\Data;
 
 use Carbon\Exceptions\Exception;
-use App\Models\GroupMemberModel;
-use App\Models\GroupModel;
 use App\Models\ProfileModel;
 use App\Models\UserModel;
 use App\Models\EducationModel;
 use App\Models\JobListingModel;
 use App\Models\JobHistoryModel;
 
-// provides access to a database
+//provides access to a database
 class DataAccessObject
 {
-
-    // declares fields necessary for a database connection
+    //declares fields necessary for a database connection
     private $conn;
 
     private $servername = "localhost";
@@ -27,18 +24,17 @@ class DataAccessObject
 
     private $dbQuery;
 
-    // no-args contructor creates a connection with the database
+
+    //no-args contructor creates a connection with the database
     public function __construct()
     {
         $this->conn = mysqli_connect($this->servername, $this->username, $this->password, $this->dbName);
     }
 
-    /*
-     * ====================================================================================================================
-     * USER STUFF
-     * ====================================================================================================================
-     */
-    // checks the data in the database to ensure that a provided username is unique
+    /*====================================================================================================================
+     *USER STUFF 
+     *====================================================================================================================*/
+    //checks the data in the database to ensure that a provided username is unique
     public function isUnique($username)
     {
         try
@@ -60,7 +56,8 @@ class DataAccessObject
         }
     }
 
-    // attempts to add a user to the database
+
+    //attempts to add a user to the database
     public function AddUser(UserModel $user)
     {
         try
@@ -82,7 +79,7 @@ class DataAccessObject
         }
     }
 
-    // authenticates whether a user attempting to sign in is valid
+    //authenticates whether a user attempting to sign in is valid
     public function Authenticate($username, $password)
     {
         try
@@ -106,7 +103,7 @@ class DataAccessObject
         }
     }
 
-    // returns the user ID of a user in the database given the username
+    //returns the user ID of a user in the database given the username
     public function getUserID($username)
     {
         try
@@ -131,7 +128,7 @@ class DataAccessObject
         }
     }
 
-    // returns a user's role given their username
+    //returns a user's role given their username
     public function getUserRole($username)
     {
         try
@@ -156,7 +153,7 @@ class DataAccessObject
         }
     }
 
-    // gets a user given a user's ID
+    //gets a user given a user's ID
     public function getUserFromID($id)
     {
         try
@@ -185,7 +182,7 @@ class DataAccessObject
         }
     }
 
-    // gets all users in the user's database and returns them in the form of an array
+    //gets all users in the user's database and returns them in the form of an array
     public function getAllUsers()
     {
         try
@@ -206,7 +203,7 @@ class DataAccessObject
         }
     }
 
-    // updates a user in the database given a UserModel object
+    //updates a user in the database given a UserModel object
     public function updateUser(UserModel $user)
     {
         try
@@ -231,7 +228,7 @@ class DataAccessObject
         }
     }
 
-    // gets a user from the database given a username and returns a corresponding UserModel object
+    //gets a user from the database given a username and returns a corresponding UserModel object
     public function getUserFromUsername($username)
     {
         try
@@ -260,7 +257,7 @@ class DataAccessObject
         }
     }
 
-    // deletes a user from the database given a UserModel object
+    //deletes a user from the database given a UserModel object
     public function deleteUser(UserModel $user)
     {
         try
@@ -277,12 +274,10 @@ class DataAccessObject
         }
     }
 
-    /*
-     * ====================================================================================================================
-     * PROFILE STUFF
-     * ====================================================================================================================
-     */
-    // adds a user's UserInfo into the userinfo table, given a foreign key within a ProfileModel object
+    /*====================================================================================================================
+     *PROFILE STUFF
+     *====================================================================================================================*/
+    //adds a user's UserInfo into the userinfo table, given a foreign key within a ProfileModel object
     public function addUserInfo(ProfileModel $userInfo)
     {
         try
@@ -305,9 +300,9 @@ class DataAccessObject
         {
         }
     }
-
-    // gets a user's profile information given a UserModel object
-    // returns a ProfileModel object
+    
+    //gets a user's profile information given a UserModel object
+    //returns a ProfileModel object
     public function getUserInfo(UserModel $user)
     {
         $userID = $user->getID();
@@ -341,17 +336,18 @@ class DataAccessObject
         {
         }
     }
-
-    // updates a user's profile information based on a given ProfileModel object
+    
+    //updates a user's profile information based on a given ProfileModel object
     public function updateUserInfo(ProfileModel $userInfo)
     {
         try
         {
-
+            
             $this->dbQuery = "UPDATE userinfo
-                                SET EMAIL = '" . $userInfo->getEmail() . "', PHONE = '" . $userInfo->getPhone() . "', GENDER = '" . $userInfo->getGender() . "', NATIONALITY = '" . $userInfo->getNationality() . "', DESCRIPTION = '" . $userInfo->getDescription() . "', SKILLS = '" . $userInfo->getSkills() . "', CERTIFICATIONS = '" . $userInfo->getCertifications() . "'
+                                SET EMAIL = '" . $userInfo->getEmail() . "', PHONE = '" . $userInfo->getPhone() . "', GENDER = '" . $userInfo->getGender() . "', NATIONALITY = '" . $userInfo->getNationality() . 
+                                "', DESCRIPTION = '" . $userInfo->getDescription() . "', SKILLS = '" . $userInfo->getSkills() . "', CERTIFICATIONS = '" . $userInfo->getCertifications() . "'
                                 WHERE ID = '" . $userInfo->getID() . "'";
-            if (mysqli_query($this->conn, $this->dbQuery))
+            if(mysqli_query($this->conn, $this->dbQuery))
             {
                 mysqli_close($this->conn);
                 return true;
@@ -366,8 +362,8 @@ class DataAccessObject
         {
         }
     }
-
-    // gets a user's profile information given the ID of the profile
+    
+    //gets a user's profile information given the ID of the profile
     public function getUserInfoFromID($profileID)
     {
         try
@@ -401,8 +397,8 @@ class DataAccessObject
         {
         }
     }
-
-    // gets a user's profile information given the user's ID
+    
+    //gets a user's profile information given the user's ID
     public function getUserInfoFromUserID($userID)
     {
         try
@@ -436,13 +432,11 @@ class DataAccessObject
         {
         }
     }
-
-    /*
-     * ====================================================================================================================
-     * EDUCATION STUFF
-     * ====================================================================================================================
-     */
-    // Adds an education to the database
+    
+    /*====================================================================================================================
+     *EDUCATION STUFF
+     *====================================================================================================================*/
+    //Adds an education to the database
     public function addEducation(EducationModel $education)
     {
         try
@@ -465,8 +459,8 @@ class DataAccessObject
         {
         }
     }
-
-    // Gets an education from the table given an EducationModel object
+    
+    //Gets an education from the table given an EducationModel object
     public function getEducation(EducationModel $education)
     {
         $educationID = $education->getID();
@@ -499,17 +493,18 @@ class DataAccessObject
         {
         }
     }
-
-    // updates an education in the table
+    
+    //updates an education in the table
     public function updateEducation(EducationModel $education)
     {
         try
         {
-
+            
             $this->dbQuery = "UPDATE education
-                                SET STARTDATE = '" . $education->getStartDate() . "', ENDDATE = '" . $education->getEndDate() . "', INSTITUTION = '" . $education->getInstitution() . "', GPA = '" . $education->getGPA() . "', TITLE = '" . $education->getTitle() . "'
+                                SET STARTDATE = '" . $education->getStartDate() . "', ENDDATE = '" . $education->getEndDate() . "', INSTITUTION = '" . $education->getInstitution() . "', GPA = '" . $education->getGPA() .
+                                "', TITLE = '" . $education->getTitle() . "'
                                 WHERE ID = '" . $education->getID() . "'";
-            if (mysqli_query($this->conn, $this->dbQuery))
+            if(mysqli_query($this->conn, $this->dbQuery))
             {
                 mysqli_close($this->conn);
                 return true;
@@ -525,8 +520,8 @@ class DataAccessObject
         {
         }
     }
-
-    // deletes an education from the database given an EducationModel object
+    
+    //deletes an education from the database given an EducationModel object
     public function deleteEducation(EducationModel $education)
     {
         try
@@ -542,8 +537,8 @@ class DataAccessObject
             return false;
         }
     }
-
-    // Gets an education from the table given a UserInfo object
+    
+    //Gets an education from the table given a UserInfo object
     public function getEducationFromProfile(ProfileModel $userInfo)
     {
         $profileID = $userInfo->getID();
@@ -552,7 +547,7 @@ class DataAccessObject
             $educations = array();
             $this->dbQuery = "SELECT * FROM education WHERE PROFILEID = '" . $profileID . "'";
             $result = mysqli_query($this->conn, $this->dbQuery);
-            while ($row = mysqli_fetch_assoc($result))
+            while($row = mysqli_fetch_assoc($result))
             {
                 $id = $row['ID'];
                 $startDate = $row['STARTDATE'];
@@ -572,8 +567,8 @@ class DataAccessObject
         {
         }
     }
-
-    // Gets an edcuation from the table given the ID of the education object
+    
+    //Gets an edcuation from the table given the ID of the education object
     public function getEducationFromID(int $educationID)
     {
         try
@@ -605,13 +600,11 @@ class DataAccessObject
         {
         }
     }
-
-    /*
-     * ====================================================================================================================
-     * JOB LISTING STUFF
-     * ====================================================================================================================
-     */
-    // adds a job listing to the table
+   
+    /*====================================================================================================================
+     *JOB LISTING STUFF
+     *====================================================================================================================*/
+    //adds a job listing to the table
     public function addJobListing(JobListingModel $jobListing)
     {
         try
@@ -634,17 +627,18 @@ class DataAccessObject
         {
         }
     }
-
-    // updates a job listing's information based on a given JobListingModel object
+    
+    //updates a job listing's information based on a given JobListingModel object
     public function updateJobListing(JobListingModel $jobListing)
     {
         try
         {
-
+            
             $this->dbQuery = "UPDATE joblisting
-                                SET TITLE = '" . $jobListing->getTitle() . "', STARTDATE = '" . $jobListing->getStartDate() . "', ENDDATE = '" . $jobListing->getEndDate() . "', DESCRIPTION = '" . $jobListing->getDescription() . "', QUALIFICATIONS = '" . $jobListing->getQualifications() . "', COMPANY = '" . $jobListing->getCompany() . "', POSITION = '" . $jobListing->getPosition() . "', SCHEDULE = '" . $jobListing->getSchedule() . "', PAY = '" . $jobListing->getPay() . "', ACTIVE = '" . $jobListing->getActive() . "'
+                                SET TITLE = '" . $jobListing->getTitle() . "', STARTDATE = '" . $jobListing->getStartDate() . "', ENDDATE = '" . $jobListing->getEndDate() . "', DESCRIPTION = '" . $jobListing->getDescription() .
+                                "', QUALIFICATIONS = '" . $jobListing->getQualifications() . "', COMPANY = '" . $jobListing->getCompany() . "', POSITION = '" . $jobListing->getPosition() . "', SCHEDULE = '" . $jobListing->getSchedule() . "', PAY = '" . $jobListing->getPay() . "', ACTIVE = '" . $jobListing->getActive() . "'
                                 WHERE ID = '" . $jobListing->getID() . "'";
-            if (mysqli_query($this->conn, $this->dbQuery))
+            if(mysqli_query($this->conn, $this->dbQuery))
             {
                 mysqli_close($this->conn);
                 return true;
@@ -659,8 +653,8 @@ class DataAccessObject
         {
         }
     }
-
-    // gets a job listing from the database given a JobListingModel object
+    
+    //gets a job listing from the database given a JobListingModel object
     public function getJobListing(JobListingModel $jobListing)
     {
         $jobListingID = $jobListing->getID();
@@ -697,8 +691,8 @@ class DataAccessObject
         {
         }
     }
-
-    // returns all job listings from the table as an array
+    
+    //returns all job listings from the table as an array
     public function getAllJobListings()
     {
         try
@@ -717,9 +711,10 @@ class DataAccessObject
         catch (Exception $e)
         {
         }
+        
     }
-
-    // deletes a job listing given a JobListingModel object
+    
+    //deletes a job listing given a JobListingModel object
     public function deleteJobListing(JobListingModel $jobListing)
     {
         try
@@ -736,7 +731,7 @@ class DataAccessObject
         }
     }
 
-    // returns all active job listings from the table as an array
+    //returns all active job listings from the table as an array
     public function getActiveJobListings()
     {
         try
@@ -756,8 +751,8 @@ class DataAccessObject
         {
         }
     }
-
-    // returns all active job listings from the table as an array
+    
+    //returns all active job listings from the table as an array
     public function getInactiveJobListings()
     {
         try
@@ -778,7 +773,7 @@ class DataAccessObject
         }
     }
 
-    // gets a job listing from the database given the id of the job listing
+    //gets a job listing from the database given the id of the job listing
     public function getJobListingFromID(int $jobListingID)
     {
         try
@@ -815,12 +810,10 @@ class DataAccessObject
         }
     }
 
-    /*
-     * ====================================================================================================================
-     * JOB HISTORY STUFF
-     * ====================================================================================================================
-     */
-    // Adds a job history to the database
+    /*====================================================================================================================
+     *JOB HISTORY STUFF
+     *====================================================================================================================*/
+    //Adds a job history to the database
     public function addJobHistory(JobHistoryModel $jobHistory)
     {
         try
@@ -843,14 +836,14 @@ class DataAccessObject
         {
         }
     }
-
-    // Gets a job history from the table given a JobHistoryModel object
+    
+    //Gets a job history from the table given a JobHistoryModel object
     public function getJobHistory(JobHistoryModel $jobHistory)
     {
         $jobHistoryID = $jobHistory->getID();
         try
         {
-            $this->dbQuery = "SELECT * FROM jobhistory WHERE ID = '" . $jobHistoryID . "'";
+            $this->dbQuery = "SELECT * FROM education WHERE ID = '" . $jobHistoryID . "'";
             $result = mysqli_query($this->conn, $this->dbQuery);
             if (mysqli_num_rows($result) == 1)
             {
@@ -878,17 +871,18 @@ class DataAccessObject
         {
         }
     }
-
-    // updates a job history in the table
+    
+    //updates a job history in the table
     public function updateJobHistory(JobHistoryModel $jobHistory)
     {
         try
         {
-
+            
             $this->dbQuery = "UPDATE jobhistory
-                                SET STARTDATE = '" . $jobHistory->getStartDate() . "', ENDDATE = '" . $jobHistory->getEndDate() . "', DESCRIPTION = '" . $jobHistory->getDescription() . "', COMPANY = '" . $jobHistory->getCompany() . "', TITLE = '" . $jobHistory->getTitle() . "'
+                                SET STARTDATE = '" . $jobHistory->getStartDate() . "', ENDDATE = '" . $jobHistory->getEndDate() . "', DESCRIPTION = '" . $jobHistory->getDescription() . "', COMPANY = '" . $jobHistory->getCompany() .
+                                "', TITLE = '" . $jobHistory->getTitle() . "'
                                 WHERE ID = '" . $jobHistory->getID() . "'";
-            if (mysqli_query($this->conn, $this->dbQuery))
+            if(mysqli_query($this->conn, $this->dbQuery))
             {
                 mysqli_close($this->conn);
                 return true;
@@ -904,8 +898,8 @@ class DataAccessObject
         {
         }
     }
-
-    // deletes a job history from the database given an JobHistoryModel object
+    
+    //deletes a job history from the database given an JobHistoryModel object
     public function deleteJobHistory(JobHistoryModel $jobHistory)
     {
         try
@@ -921,8 +915,8 @@ class DataAccessObject
             return false;
         }
     }
-
-    // Gets a user's full job history from the table given a UserInfo object
+    
+    //Gets a user's full job history from the table given a UserInfo object
     public function getJobHistoryFromUserInfo(ProfileModel $userInfo)
     {
         $profileID = $userInfo->getID();
@@ -931,7 +925,7 @@ class DataAccessObject
             $this->dbQuery = "SELECT * FROM jobhistory WHERE PROFILEID = '" . $profileID . "'";
             $result = mysqli_query($this->conn, $this->dbQuery);
             $jobHistories = array();
-            while ($row = mysqli_fetch_assoc($result))
+            while($row = mysqli_fetch_assoc($result))
             {
                 $id = $row['ID'];
                 $startDate = $row['STARTDATE'];
@@ -952,8 +946,8 @@ class DataAccessObject
         {
         }
     }
-
-    // Gets an edcuation from the table given the ID of the education object
+    
+    //Gets an edcuation from the table given the ID of the education object
     public function getJobHistoryFromID(int $jobHistoryID)
     {
         try
@@ -981,459 +975,6 @@ class DataAccessObject
                 mysqli_close($this->conn);
                 return - 1;
             }
-        }
-        catch (Exception $e)
-        {
-        }
-    }
-
-    /*
-     * ====================================================================================================================
-     * GROUP STUFF
-     * ====================================================================================================================
-     */
-    // Adds a job history to the database
-    public function addGroup(GroupModel $group)
-    {
-        if ($this->checkUniqueGroup($group))
-        {
-            try
-            {
-                $this->dbQuery = "INSERT INTO groups (TITLE, DESCRIPTION)
-                                VALUES ('" . $group->getTitle() . "', '" . $group->getDescription() . "')";
-                if (mysqli_query($this->conn, $this->dbQuery))
-                {
-                    mysqli_close($this->conn);
-                    return true;
-                }
-                else
-                {
-                    echo mysqli_error($this->conn);
-                    mysqli_close($this->conn);
-                    return false;
-                }
-            }
-            catch (Exception $e)
-            {
-            }
-        }
-        else
-        {
-            echo "Not a unique group.";
-        }
-    }
-
-    // Gets a job history from the table given a GroupModel object
-    public function getGroup(GroupModel $group)
-    {
-        $groupID = $group->getID();
-        try
-        {
-            $this->dbQuery = "SELECT * FROM groups WHERE ID = '" . $groupID . "'";
-            $result = mysqli_query($this->conn, $this->dbQuery);
-            if (mysqli_num_rows($result) == 1)
-            {
-                $row = mysqli_fetch_assoc($result);
-                $id = $row['ID'];
-                $title = $row['TITLE'];
-                $description = $row['DESCRIPTION'];
-                $group = new GroupModel($id, $title, $description);
-                mysqli_free_result($result);
-                mysqli_close($this->conn);
-                return $group;
-            }
-            else
-            {
-                mysqli_close($this->conn);
-                return - 1;
-            }
-        }
-        catch (Exception $e)
-        {
-        }
-    }
-
-    // updates a job history in the table
-    public function updateGroup(GroupModel $group)
-    {
-        try
-        {
-
-            $this->dbQuery = "UPDATE groups
-                                SET DESCRIPTION = '" . $group->getDescription() . "', TITLE = '" . $group->getTitle() . "'
-                                WHERE ID = '" . $group->getID() . "'";
-            if (mysqli_query($this->conn, $this->dbQuery))
-            {
-                mysqli_close($this->conn);
-                return true;
-            }
-            else
-            {
-                echo mysqli_error($this->conn);
-                mysqli_close($this->conn);
-                return false;
-            }
-        }
-        catch (Exception $e)
-        {
-        }
-    }
-
-    // deletes a job history from the database given an GroupModel object
-    public function deleteGroup(GroupModel $group)
-    {
-        try
-        {
-            $groupID = $group->getID();
-            $this->dbQuery = "DELETE FROM groups WHERE ID = '" . $groupID . "'";
-            mysqli_query($this->conn, $this->dbQuery);
-            mysqli_close($this->conn);
-            return true;
-        }
-        catch (Exception $e)
-        {
-            return false;
-        }
-    }
-
-    // Gets a user's full job history from the table given a UserInfo object
-    public function getGroupsFromUserID(int $userID)
-    {
-        try
-        {
-            $this->dbQuery = "SELECT * FROM groups WHERE PROFILEID = '" . $userID . "'";
-            $result = mysqli_query($this->conn, $this->dbQuery);
-            $groups = array();
-            while ($row = mysqli_fetch_assoc($result))
-            {
-                $id = $row['ID'];
-                $description = $row['DESCRIPTION'];
-                $title = $row['TITLE'];
-                $group = new GroupModel($id, $title, $description);
-                $groups[] = $group;
-            }
-            mysqli_free_result($result);
-            mysqli_close($this->conn);
-            return $groups;
-        }
-        catch (Exception $e)
-        {
-        }
-    }
-    
-    public function getGroupFromTitle(string $groupTitle)
-    {
-        try
-        {
-            $this->dbQuery = "SELECT * FROM groups WHERE TITLE = '" . $groupTitle . "'";
-            $result = mysqli_query($this->conn, $this->dbQuery);
-            if (mysqli_num_rows($result) == 1)
-            {
-                $row = mysqli_fetch_assoc($result);
-                $id = $row['ID'];
-                $description = $row['DESCRIPTION'];
-                $title = $row['TITLE'];
-                $group = new GroupModel($id, $title, $description);
-                mysqli_free_result($result);
-                mysqli_close($this->conn);
-                return $group;
-            }
-            else
-            {
-                echo mysqli_error($this->conn);
-                mysqli_close($this->conn);
-                return - 1;
-            }
-        }
-        catch (Exception $e)
-        {
-        }
-    }
-
-    // Gets an edcuation from the table given the ID of the education object
-    public function getGroupFromID(int $groupID)
-    {
-        try
-        {
-            $this->dbQuery = "SELECT * FROM groups WHERE ID = '" . $groupID . "'";
-            $result = mysqli_query($this->conn, $this->dbQuery);
-            if (mysqli_num_rows($result) == 1)
-            {
-                $row = mysqli_fetch_assoc($result);
-                $id = $row['ID'];
-                $description = $row['DESCRIPTION'];
-                $title = $row['TITLE'];
-                $group = new GroupModel($id, $title, $description);
-                mysqli_free_result($result);
-                mysqli_close($this->conn);
-                return $group;
-            }
-            else
-            {
-                mysqli_close($this->conn);
-                return - 1;
-            }
-        }
-        catch (Exception $e)
-        {
-        }
-    }
-
-    public function checkUniqueGroup(GroupModel $group)
-    {
-        try
-        {
-            $this->dbQuery = "SELECT TITLE FROM groups WHERE TITLE = '" . $group->getTitle() . "'";
-            $result = mysqli_query($this->conn, $this->dbQuery);
-            if (mysqli_num_rows($result) == 0)
-            {
-                return true;
-            }
-            else
-            {
-                mysqli_free_result($result);
-                return false;
-            }
-        }
-        catch (Exception $e)
-        {
-        }
-    }
-
-    public function getAllGroups()
-    {
-        try
-        {
-            $this->dbQuery = "SELECT * FROM groups";
-            if ($result = mysqli_query($this->conn, $this->dbQuery))
-            {
-                $groups = array();
-                while ($row = mysqli_fetch_assoc($result))
-                {
-                    $id = $row['ID'];
-                    $title = $row['TITLE'];
-                    $description = $row['DESCRIPTION'];
-                    $group = new GroupModel($id, $title, $description);
-                    $groups[] = $group;
-                }
-                mysqli_close($this->conn);
-                return $groups;
-            }
-            else
-            {
-                echo mysqli_error($this->conn);
-                mysqli_close($this->conn);
-                return false;
-            }
-        }
-        catch (Exception $e)
-        {
-        }
-    }
-
-    /*
-     * ====================================================================================================================
-     * GROUP MEMBER STUFF
-     * ====================================================================================================================
-     */
-    // Adds a job history to the database
-    public function addGroupMember(GroupMemberModel $groupMember)
-    {
-        try
-        {
-            $this->dbQuery = "INSERT INTO groupmember (USERID, GROUPID, ISADMINORLEADER)
-                                VALUES ('" . $groupMember->getUserID() . "', '" . $groupMember->getGroupID() . "', '" . $groupMember->getIsAdminOrLeader() . "')";
-            if (mysqli_query($this->conn, $this->dbQuery))
-            {
-                mysqli_close($this->conn);
-                return true;
-            }
-            else
-            {
-                echo mysqli_error($this->conn);
-                mysqli_close($this->conn);
-                return false;
-            }
-        }
-        catch (Exception $e)
-        {
-        }
-    }
-
-    // Gets a job history from the table given a GroupMemberModel object
-    public function getGroupMember(GroupMemberModel $groupMember)
-    {
-        $groupMemberID = $groupMember->getID();
-        try
-        {
-            $this->dbQuery = "SELECT * FROM groupmember WHERE ID = '" . $groupMemberID . "'";
-            $result = mysqli_query($this->conn, $this->dbQuery);
-            if (mysqli_num_rows($result) == 1)
-            {
-                $row = mysqli_fetch_assoc($result);
-                $id = $row['ID'];
-                $userID = $row['USERID'];
-                $groupID = $row['GROUPID'];
-                $isAdminOrLeader = [
-                    'ISADMINORLEADER'
-                ];
-                $groupMember = new GroupMemberModel($id, $userID, $groupID, $isAdminOrLeader);
-                mysqli_free_result($result);
-                mysqli_close($this->conn);
-                return $groupMember;
-            }
-            else
-            {
-                mysqli_close($this->conn);
-                return - 1;
-            }
-        }
-        catch (Exception $e)
-        {
-        }
-    }
-
-    // updates a job history in the table
-    public function updateGroupMember(GroupMemberModel $groupMember)
-    {
-        try
-        {
-
-            $this->dbQuery = "UPDATE groupmember
-                                SET USERID = '" . $groupMember->getUserID() . "', GROUPID = '" . $groupMember->getGroupID() . "'
-                                WHERE ID = '" . $groupMember->getID() . "'";
-            if (mysqli_query($this->conn, $this->dbQuery))
-            {
-                mysqli_close($this->conn);
-                return true;
-            }
-            else
-            {
-                echo mysqli_error($this->conn);
-                mysqli_close($this->conn);
-                return false;
-            }
-        }
-        catch (Exception $e)
-        {
-        }
-    }
-
-    // deletes a job history from the database given an GroupMemberModel object
-    public function deleteGroupMember(GroupMemberModel $groupMember)
-    {
-        try
-        {
-            $groupMemberID = $groupMember->getID();
-            $this->dbQuery = "DELETE FROM groupmember WHERE ID = '" . $groupMemberID . "'";
-            mysqli_query($this->conn, $this->dbQuery);
-            mysqli_close($this->conn);
-            return true;
-        }
-        catch (Exception $e)
-        {
-            return false;
-        }
-    }
-
-    // Gets a user's full job history from the table given a UserInfo object
-    public function getGroupMembersFromGroupID(int $groupID)
-    {
-        try
-        {
-            $this->dbQuery = "SELECT * FROM groupmember WHERE groupID = '" . $groupID . "'";
-            $result = mysqli_query($this->conn, $this->dbQuery);
-            $groupMembers = array();
-            while ($row = mysqli_fetch_assoc($result))
-            {
-                $id = $row['ID'];
-                $userID = $row['USERID'];
-                $groupID = $row['GROUPID'];
-                $isAdminOrLeader = [
-                    'ISADMINORLEADER'
-                ];
-                $groupMember = new GroupMemberModel($id, $userID, $groupID, $isAdminOrLeader);
-                $groupMembers[] = $groupMember;
-            }
-            mysqli_free_result($result);
-            mysqli_close($this->conn);
-            return $groupMembers;
-        }
-        catch (Exception $e)
-        {
-        }
-    }
-
-    // Gets an edcuation from the table given the ID of the education object
-    public function getGroupMemberFromID(int $groupMemberID)
-    {
-        try
-        {
-            $this->dbQuery = "SELECT * FROM groupmember WHERE ID = '" . $groupMemberID . "'";
-            $result = mysqli_query($this->conn, $this->dbQuery);
-            if (mysqli_num_rows($result) == 1)
-            {
-                $row = mysqli_fetch_assoc($result);
-                $id = $row['ID'];
-                $userID = $row['USERID'];
-                $groupID = $row['GROUPID'];
-                $isAdminOrLeader = [
-                    'ISADMINORLEADER'
-                ];
-                $groupMember = new GroupMemberModel($id, $userID, $groupID, $isAdminOrLeader);
-                mysqli_free_result($result);
-                mysqli_close($this->conn);
-                return $groupMember;
-            }
-            else
-            {
-                mysqli_close($this->conn);
-                return - 1;
-            }
-        }
-        catch (Exception $e)
-        {
-        }
-    }
-
-    public function getNumOfGroupMembers(GroupModel $group)
-    {
-        $groupID = $group->getID();
-        try
-        {
-            $this->dbQuery = "SELECT * FROM groupmember WHERE GROUPID = '" . $groupID . "'";
-            $result = mysqli_query($this->conn, $this->dbQuery);
-            $count = mysqli_num_rows($result);
-            mysqli_free_result($result);
-            mysqli_close($this->conn);
-            return $count;
-        }
-        catch (Exception $e)
-        {
-        }
-    }
-    
-    public function isMemberInGroup(GroupModel $group, UserModel $user)
-    {
-        $userID = $user->getID();
-        $groupID = $group->getID();
-        try
-        {
-            $this->dbQuery = "SELECT * FROM groupmember WHERE GROUPID = '" . $groupID . "' AND USERID = '" . $userID . "'";
-            $result = mysqli_query($this->conn, $this->dbQuery);
-            if(mysqli_num_rows($result) > 0)
-            {
-                mysqli_free_result($result);
-                mysqli_close($this->conn);
-                return true;
-            }
-            else 
-            {
-                mysqli_free_result($result);
-                mysqli_close($this->conn);
-                return false;
-            }
-            
         }
         catch (Exception $e)
         {

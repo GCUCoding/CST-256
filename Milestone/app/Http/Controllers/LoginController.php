@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UserModel;
 use App\Services\Business\BusinessService;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Session;
 
 //handles logging in
@@ -38,12 +39,14 @@ class LoginController extends Controller
             {
                 
                 //sends the user Id and role to the session
+
                 session_start();
                 session(['userID' => $user->getID()]) ;
                 session(['role' => $user->getRole()]) ;
             }
             else
             {
+
                 //restarts the session
                 session_abort();
                 session_start();

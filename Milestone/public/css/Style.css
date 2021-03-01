@@ -38,7 +38,13 @@ li
 	padding: 8px;
 }
 
-.button 
+input type="submit"
+{
+	border: 2px solid #000099;
+	font-weight: 500;
+}
+
+.navbutton 
 {
   border: none;
   color: white;
@@ -49,7 +55,7 @@ li
   font-size: 16px;
 }
 
-.button:hover 
+.navbutton:hover 
 {
   background-color: white;
   color: black;
@@ -93,11 +99,10 @@ td
 
 .editForm
 {
-	padding: 10px;
+	padding: 20px;
 	text-align: center;
 	background-color: white;
 	color: black;
 	border: 10px solid #000099; /* dark blue */
 	width: 30%;
-	
 }

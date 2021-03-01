@@ -26,7 +26,7 @@ class AdminController extends Controller
         $data = ['user' => $user];
         return view('Admin/editUserDetails')->with($data);
     }
-    
+
     //Takes user information from a view and updates a user based on the information
     public function confirmEditUser(Request $request)
     {
@@ -41,8 +41,7 @@ class AdminController extends Controller
         $data = ['users' => $users];
         return view('Admin/users')->with($data);
     }
-    
-    
+
     //deletes a user
     public function deleteUser(Request $request)
     {
@@ -61,6 +60,7 @@ class AdminController extends Controller
         return view('Admin/users')->with($data);
     }
     
+
     //Ignore this. It breaks everything for some reason. ¯\_(ツ)_/¯
     public function validateForm(Request $request)
     {
@@ -87,6 +87,7 @@ class AdminController extends Controller
         return view('Admin/editUserProfile')->with($data);
     }
     
+
     //send the admin back to the users page and handles the editing of user profile info
     public function editedUserProfile(Request $request)
     {
