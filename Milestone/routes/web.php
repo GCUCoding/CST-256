@@ -106,4 +106,6 @@ Route::post('/leaveGroup', 'GroupController@leaveGroup');
 
 Route::post('/deleteGroup', 'GroupController@deleteGroup');
 
+Route::post('/toEditGroup', 'GroupController@toEditGroup');
+
 ?>

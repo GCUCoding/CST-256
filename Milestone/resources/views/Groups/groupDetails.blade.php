@@ -50,13 +50,14 @@
         		@endif
         		</th>
         	</tr>
+        	<?php $i = 0;?>
         <!-- foreach loop to populate users table -->
     	@foreach($groupMembers as $groupMember)
         	<tr>
         	<!-- display user data and include buttons for editing and deleting users -->
-        		<td><?php echo $groupMember->getUserId();?></td>
+        		<td><?php echo $groupMemberNames[$i];?></td>
 				@if($isAdminOrLeader == 1 && $isInGroup == 1 && $userId == $groupMember->getUserId())
-				<td><form action="editGroupMembers" method="post">
+				<td><form action="toEditGroup" method="post">
 				{{ csrf_field() }}
 				<input type="hidden" name="userId" value="<?php echo $groupMember->getUserId()?>"></input>
     				<input type="hidden" name="groupId" value="<?php echo $groupId;?>"></input>
@@ -64,18 +65,20 @@
 				</form></td>
 				@endif
         	</tr>
+        	<?php $i++;?>
     	@endforeach
 		</table>
-	</div>
+		<br/>
 	@if($isAdminOrLeader == 1)
 	<form action="deleteGroup" method="post">
 		{{ csrf_field() }}
 		<input type="hidden" name="userId" value="<?php echo $groupMember->getUserId()?>"></input>
     				<input type="hidden" name="groupId" value="<?php echo $groupId;?>"></input>
-    				<input type="submit" name="submission" value="Delete Group"></input>
-    				<h5><b>Warning: This is a permanent change.</b></h5>
+    				<input type="submit" name="submission" style="background-color: red; color: white;" value="Delete Group"></input>
+    				<h4><b style="color: red; font-weight: 700;">Warning: This is a permanent change.</b></h4>
 	</form>
 	@endif
 	@endsection
+	</div>
 </body>
 </html>

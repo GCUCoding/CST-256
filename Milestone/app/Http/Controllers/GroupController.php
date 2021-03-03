@@ -66,10 +66,12 @@ class GroupController extends Controller
         $group = $this->businessService->getGroupFromID($request->input('id'));
         $user = $this->businessService->getUserFromID($request->input('userID'));
         $groupMembers = $this->businessService->getGroupMembersFromGroupID($group->getID());
+        $groupMemberNames = array();
         $isAdminOrLeader = 0;
         $isInGroup = 0;
         foreach($groupMembers as $groupMember)
         {
+            $groupMemberNames[] = $this->businessService->getUserFromID($groupMember->getUserID())->getUsername();
             if($groupMember->getUserID() == $user->getID())
             {
                 $isInGroup = 1;
@@ -84,7 +86,7 @@ class GroupController extends Controller
             $isAdminOrLeader = 1;
         }
 
-        $data = ['group' => $group, 'groupMembers' => $groupMembers, 'user' => $user, 'isAdminOrLeader' => $isAdminOrLeader, 'isInGroup' => $isInGroup];
+        $data = ['group' => $group, 'groupMembers' => $groupMembers, 'groupMemberNames' => $groupMemberNames, 'user' => $user, 'isAdminOrLeader' => $isAdminOrLeader, 'isInGroup' => $isInGroup];
 
         return view('Groups/groupDetails')->with($data);
     }
@@ -96,10 +98,12 @@ class GroupController extends Controller
         $user = $this->businessService->getUserFromID($request->input('userId'));
         $this->businessService->addGroupMember(new GroupMemberModel(null, $user->getID(), $group->getID(), 0));
         $groupMembers = $this->businessService->getGroupMembersFromGroupID($group->getID());
+        $groupMemberNames = array();
         $isAdminOrLeader = 0;
         $isInGroup = 0;
         foreach($groupMembers as $groupMember)
         {
+            $groupMemberNames[] = $this->businessService->getUserFromID($groupMember->getUserID())->getUsername();
             if($groupMember->getUserID() == $user->getID())
             {
                 $isInGroup = 1;
@@ -114,7 +118,7 @@ class GroupController extends Controller
             $isAdminOrLeader = 1;
         }
         
-        $data = ['group' => $group, 'groupMembers' => $groupMembers, 'user' => $user, 'isAdminOrLeader' => $isAdminOrLeader, 'isInGroup' => $isInGroup];
+        $data = ['group' => $group, 'groupMembers' => $groupMembers, 'groupMemberNames' => $groupMemberNames, 'user' => $user, 'isAdminOrLeader' => $isAdminOrLeader, 'isInGroup' => $isInGroup];
         
         return view('Groups/groupDetails')->with($data);
         
@@ -128,10 +132,12 @@ class GroupController extends Controller
         $groupMember = $this->businessService->getGroupMemberFromUserID($group, $user->getID());
         $this->businessService->deleteGroupMember($groupMember);
         $groupMembers = $this->businessService->getGroupMembersFromGroupID($group->getID());
+        $groupMemberNames = array();
         $isAdminOrLeader = 0;
         $isInGroup = 0;
         foreach($groupMembers as $groupMember)
         {
+            $groupMemberNames[] = $this->businessService->getUserFromID($groupMember->getUserID())->getUsername();
             if($groupMember->getUserID() == $user->getID())
             {
                 $isInGroup = 1;
@@ -145,8 +151,22 @@ class GroupController extends Controller
         {
             $isAdminOrLeader = 1;
         }
+        //If the person leaving the group is the only one in the goup
+        //Delete the group and redirects to the all groups page
+        if(sizeof($groupMembers) == 0)
+        {
+            $this->businessService->deleteGroup($group);
+            $groups = $this->businessService->getAllGroups();
+            $groupMemberNums = array();
+            foreach($groups as $group)
+            {
+                $groupMemberNums[] = $this->businessService->getNumOfGroupMembers($group);
+            }
+            $data = ['groups' => $groups, 'groupMemberNums' => $groupMemberNums];
+            return view('Groups/groupList')->with($data);
+        }
         
-        $data = ['group' => $group, 'groupMembers' => $groupMembers, 'user' => $user, 'isAdminOrLeader' => $isAdminOrLeader, 'isInGroup' => $isInGroup];
+        $data = ['group' => $group, 'groupMembers' => $groupMembers, 'groupMemberNames' => $groupMemberNames, 'user' => $user, 'isAdminOrLeader' => $isAdminOrLeader, 'isInGroup' => $isInGroup];
         
         return view('Groups/groupDetails')->with($data);
         
@@ -165,6 +185,22 @@ class GroupController extends Controller
         }
         $data = ['groups' => $groups, 'groupMemberNums' => $groupMemberNums];
         return view('Groups/groupList')->with($data);
+    }
+    
+    public function toEditGroup(Request $request)
+    {
+        $this->businessService = new BusinessService();
+        $group = $this->businessService->getGroupFromID($request->input('groupId'));
+        $groupMembers = $this->businessService->getGroupMembersFromGroupID($group->getID());
+        $groupMemberNames = array();
+        foreach($groupMembers as $groupMember)
+        {
+            $groupMemberNames[] = $this->businessService->getUserFromID($groupMember->getUserID())->getUsername();
+        }
+        
+        $data = ['group' => $group, 'groupMembers' => $groupMembers, 'groupMemberNames' => $groupMemberNames];
+        return view('Groups/editGroup')->with($data);
+        
     }
     
     public function deleteGroup(Request $request)
