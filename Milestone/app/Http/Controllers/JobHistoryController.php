@@ -69,4 +69,16 @@ class JobHistoryController extends Controller
         $data = ['jobHistory' => $jobHistory];
         return view('JobHistory/jobHistoryDetails')->with($data);
     }
+    
+    public function deleteJobHistory(Request $request)
+    {
+        $this->businessService = new BusinessService();
+        $this->businessService->deleteJobHistory($this->businessService->getJobHistoryFromID($request->input('id')));
+        $user = $this->businessService->getUserFromID(session('userID'));
+        $userInfo = $this->businessService->getUserInfo($user);
+        $jobHistories = $this->businessService->getJobHistoryFromUserInfo($userInfo);
+        $educations = $this->businessService->getEducationFromProfile($userInfo);
+        $data = ['user' => $user, 'userInfo' => $userInfo, 'jobHistories' => $jobHistories, 'educations' => $educations];
+        return view('Customer/userProfileDetails')->with($data);
+    }
 }

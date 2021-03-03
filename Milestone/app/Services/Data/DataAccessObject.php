@@ -447,8 +447,8 @@ class DataAccessObject
     {
         try
         {
-            $this->dbQuery = "INSERT INTO education (PROFILEID)
-                                VALUES ('" . $education->getProfileID() . "')";
+            $this->dbQuery = "INSERT INTO education (STARTDATE, ENDDATE, INSTITUTION, GPA, TITLE, PROFILEID)
+                                VALUES ('" . $education->getStartDate() . "', '" . $education->getEndDate() . "', '" . $education->getInstitution() . "', '" . $education->getGPA() . "', '" . $education->getTitle() . "', '" . $education->getProfileID() . "')";
             if (mysqli_query($this->conn, $this->dbQuery))
             {
                 mysqli_close($this->conn);

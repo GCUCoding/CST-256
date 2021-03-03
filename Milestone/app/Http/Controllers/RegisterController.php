@@ -51,12 +51,6 @@ class RegisterController extends Controller
             $userInfo = $this->businessService->getUserInfo($user);
             
             $userInfoID = $userInfo->getID();
-
-            //creates a new EducationModel object with the user info's ID to be used as a foreign key
-            $education = new EducationModel(null, null, null, null, 0.00, null, $userInfoID);
-
-            //adds the user's education to the database
-            $this->businessService->addEducation($education);
             
             //effectively logs user in
             if(null == session('userID'))

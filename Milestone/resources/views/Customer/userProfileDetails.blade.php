@@ -43,7 +43,7 @@ use App\Models\JobHistoryModel;
         		<h2><b>Skills:</b> <?php echo $userInfoSkills?></h2>
         		<h2><b>Certifications:</b> <?php echo $userInfoCertifications?></h2>
             	<input type="hidden" name="id" value="<?php echo $userID;?>"></input>
-            	<input type="submit" name="submission" value="Edit"></input>
+            	<input type="submit" name="submission" value="Edit Profile"></input>
     		</form>
 		</div><!-- End of User Profile div -->
 		<!-- Start of User Profile div -->
@@ -86,10 +86,10 @@ use App\Models\JobHistoryModel;
             	</tr>
         	@endforeach
     		</table>
-<!--         	<form action="addEducation" method="post"> -->
-<!--     		{{ csrf_field() }} -->
-<!--     		<input type="submit" name="submission" value="Add Education"></input> -->
-<!--     		</form> -->
+         	<form action="addEducation" method="post"> 
+     		{{ csrf_field() }} 
+    		<input type="submit" name="submission" value="Add Education"></input>
+     		</form> 
 		</div><!-- End of User Profile div -->
 	    <!-- Start of Job history div -->
     	<div class="editForm">
