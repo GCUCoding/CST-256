@@ -2,11 +2,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=Cp1252">
-<title>Edit User Profile</title>
+<title>Edit Job History</title>
 </head>
 <body>
 @extends('layouts.appmaster')
-@section('title', 'Edit User Profile')
+@section('title', 'Edit Job History')
 @section('content')
 <?php 
     $id = $jobHistory->getID();
@@ -24,25 +24,25 @@
     <!-- necessary input for laravel forms -->
     {{ csrf_field() }}
     		<!-- input box to hold user's email -->
-    		<label for="title">Job Title: </label><br>
+    		<label for="title">Job Title: </label>
     		<input type='text' name='title' id='title' value="<?php echo $title;?>"></input>
 			<br>
 			<!-- input box to hold user's phone -->
-    		<label for="startDate">Start Date: </label><br>
+    		<label for="startDate">Start Date: </label>
     		<input type='date' name='startDate' id='startDate' value="<?php echo $startDate;?>"></input>
 			<br>
 			<!-- input box to hold user's gender -->
-    		<label for="endDate">End Date: </label><br>
+    		<label for="endDate">End Date: </label>
     		<input type='date' name='endDate' id='endDate' value="<?php echo $endDate;?>"></input>
     		<br>
     		<!-- input box to hold user's gender -->
-    		<label for="description">Description: </label><br>
+    		<label for="description">Description: </label>
     		<input type='text' name='description' id='description' value = "<?php echo $description;?>"></input>
 			<br>
 			<!-- input box to hold user's skills -->
-    		<label for="company">Company: </label><br>
+    		<label for="company">Company: </label>
     		<input type='text' name='company' id='company' value = "<?php echo $company;?>"></input>
-			<br>
+			<br><br>
 			<!-- User ID and id used to determine which user's info is being edited -->
 			<input type="hidden" name="id" value="<?php echo $id;?>"></input>
 			<input type="hidden" name="profileID" value="<?php echo $profileID?>"></input>

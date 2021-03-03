@@ -11,7 +11,6 @@ use App\Models\EducationModel;
     @extends('layouts.appmaster')
 	@section('title', 'Login Page')
 	@section('content')
-	@foreach($educations as $education)
     <?php 
         //declares and initializes necessary variables for later use
         $id = $education->getID();
@@ -48,7 +47,6 @@ use App\Models\EducationModel;
     	<input type="submit" name="submission" value="Save"></input>
     </form>
     </div>
-    @endforeach
     @endsection
     </body>
 </html>

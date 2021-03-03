@@ -12,10 +12,8 @@ class EducationController extends Controller
     public function Index(Request $request)
     {
         $this->businessService = new BusinessService();
-        $profileID = $request->input('profileID');
-        $userInfo = $this->businessService->getUserInfoFromID($profileID);
-        $educations = $this->businessService->getEducationFromProfile($userInfo);
-        $data = ['educations' => $educations];
+        $education = $this->businessService->getEducationFromID($request->input('id'));
+        $data = ['education' => $education];
         return view('Customer/education')->with($data);
     }
      
@@ -24,10 +22,11 @@ class EducationController extends Controller
         $this->businessService = new BusinessService();
         $education = new EducationModel($request->input('id'), $request->input('startDate'), $request->input('endDate'), $request->input('institution'), $request->input('gpa'), $request->input('title'), $request->input('profileID'));
         $this->businessService->updateEducation($education);
-        $education = $this->businessService->getEducation($education);
-        $userInfo = $this->businessService->getUserInfoFromID($education->getProfileID());
+        $user = $this->businessService->getUserFromID(session('userID'));
+        $userInfo = $this->businessService->getUserInfo($user);
+        $jobHistories = $this->businessService->getJobHistoryFromUserInfo($userInfo);
         $educations = $this->businessService->getEducationFromProfile($userInfo);
-        $data = ['educations' => $educations];
-        return view('Customer/education')->with($data);
+        $data = ['user' => $user, 'userInfo' => $userInfo, 'jobHistories' => $jobHistories, 'educations' => $educations];
+        return view('Customer/userProfileDetails')->with($data);
     }
 }

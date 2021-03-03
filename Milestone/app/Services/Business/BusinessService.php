@@ -153,6 +153,12 @@ class BusinessService
         return $this->dao->getEducationFromProfile($userInfo);
     }
     
+    public function getEducationFromID($educationID)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getEducationFromID($educationID);
+    }
+    
     /*====================================================================================================================
      *JOBLISTING STUFF
      *====================================================================================================================*/

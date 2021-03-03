@@ -34,7 +34,11 @@ Route::get('/login', function()
 
 Route::post('/logged', 'LoginController@index');
 
-Route::get('/logged', 'LoginController@userAccess');
+Route::get('/viewUsers', 'LoginController@viewUsers');
+
+Route::get('/profile', 'LoginController@userAccess');
+
+Route::post('/editProfilePage', 'LoginController@profile');
 
 Route::post('/editUser', 'AdminController@editUser');
 
@@ -63,8 +67,6 @@ Route::get('/logout', 'LoginController@Logout');
 Route::post('/education', 'EducationController@index');
 
 Route::post('/editEducation', 'EducationController@edit');
-
-Route::get('/adminProfile', 'LoginController@profile');
 
 Route::get('/jobs', 'JobListingController@index');
 

@@ -33,10 +33,12 @@ class JobHistoryController extends Controller
         $this->businessService = new BusinessService();
         $jobHistory = new JobHistoryModel(null, $request->input('title'), $request->input('startDate'), $request->input('endDate'), $request->input('description'), $request->input('company'), $request->input('profileID'), null);
         $this->businessService->addJobHistory($jobHistory);
-        $userInfo = $this->businessService->getUserInfoFromID($request->input('profileID'));
+        $user = $this->businessService->getUserFromID(session('userID'));
+        $userInfo = $this->businessService->getUserInfo($user);
         $jobHistories = $this->businessService->getJobHistoryFromUserInfo($userInfo);
-        $data = ['jobHistories' => $jobHistories];
-        return view('JobHistory/jobHistory')->with($data);
+        $educations = $this->businessService->getEducationFromProfile($userInfo);
+        $data = ['user' => $user, 'userInfo' => $userInfo, 'jobHistories' => $jobHistories, 'educations' => $educations];
+        return view('Customer/userProfileDetails')->with($data);
     }
     
     public function jobHistoryEditPage(Request $request)
@@ -52,10 +54,12 @@ class JobHistoryController extends Controller
         $this->businessService = new BusinessService();
         $jobHistory = new JobHistoryModel($request->input('id'), $request->input('title'), $request->input('startDate'), $request->input('endDate'), $request->input('description'), $request->input('company'), null, null);
         $this->businessService->updateJobHistory($jobHistory);
-        $userInfo = $this->businessService->getUserInfoFromID($request->input('profileID'));
+        $user = $this->businessService->getUserFromID(session('userID'));
+        $userInfo = $this->businessService->getUserInfo($user);
         $jobHistories = $this->businessService->getJobHistoryFromUserInfo($userInfo);
-        $data = ['jobHistories' => $jobHistories];
-        return view('JobHistory/jobHistory')->with($data);
+        $educations = $this->businessService->getEducationFromProfile($userInfo);
+        $data = ['user' => $user, 'userInfo' => $userInfo, 'jobHistories' => $jobHistories, 'educations' => $educations];
+        return view('Customer/userProfileDetails')->with($data);
     }
     
     public function viewJobHistoryDetails(Request $request)

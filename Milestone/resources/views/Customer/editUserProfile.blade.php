@@ -28,42 +28,31 @@
     <form action="editedUserInfo" method="post">
     {{ csrf_field() }}
 
-    		<label for="email">Email: </label><br>
+    		<label for="email">Email: </label>
     		<input type='text' name='email' id='email' value="<?php echo $email;?>"></input>
-			<br>
-    		<label for="phone">Phone: </label><br>
+			<br/>
+    		<label for="phone">Phone: </label>
     		<input type='text' name='phone' id='phone' value="<?php echo $phone;?>"></input>
-			<br>
-    		<label for="gender">Gender: </label><br>
+			<br/>
+    		<label for="gender">Gender: </label>
     		<input type='text' name='gender' id='gender' value="<?php echo $gender;?>"></input>
-    		<br>
-    		<label for="nationality">Nationality: </label><br>
+    		<br/>
+    		<label for="nationality">Nationality: </label>
     		<input type='text' name='nationality' id='nationality' value = "<?php echo $nationality;?>"></input>
-			<br>
-    		<label for="description">Description: </label><br>
+			<br/>
+    		<label for="description">Description: </label>
     		<input type='text' name='description' id='description' value = "<?php echo $description;?>"></input>
-    		<br>
-    		<label for="skills">Skills: </label><br>
+    		<br/>
+    		<label for="skills">Skills: </label>
     		<input type='text' name='skills' id='skills' value = "<?php echo $skills;?>"></input>
-    		<br>
-    		<label for="certifications">Certifications: </label><br>
+    		<br/>
+    		<label for="certifications">Certifications: </label>
     		<input type='text' name='certifications' id='certifications' value = "<?php echo $certifications;?>"></input>
-    	<br>
+    	<br/><br/>
     	<!-- hidden forms to specify which user's userinfo should be updated -->
     	<input type="hidden" name="id" value="<?php echo $id;?>"></input>
     	<input type="hidden" name="userID" value="<?php echo $userID;?>"></input>
-    	<input type="submit" name="submission" value="Edit User"></input>
-    	</form>
-    	<form action="education" method="post">
-    	{{ csrf_field() }}
-    			<input type="hidden" name="profileID" value="<?php echo $id;?>"></input>
-    			<input type="submit" name="submitted" value="View/Edit Education"></input>
-    	</form>
-    	</form>
-    	<form action="jobHistory" method="post">
-    	{{ csrf_field() }}
-    			<input type="hidden" name="profileID" value="<?php echo $id;?>"></input>
-    			<input type="submit" name="submitted" value="View/Edit Job History"></input>
+    	<input type="submit" name="submission" value="Save"></input>
     	</form>
     	</div>
     @endsection

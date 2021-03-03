@@ -24,15 +24,11 @@ class CustomerController extends Controller
         
         //updates the user info based on the profile information provided
         $this->businessService->updateUserInfo($userInfo);
-        
-        
-        //gets a user based on the userInfo provided in order to get new, updated user info
-        $user = $this->businessService->getUserFromID($userInfo->getUserID());
-        
-        
-        //gets updated user info and returns the new profile
+        $user = $this->businessService->getUserFromID(session('userID'));
         $userInfo = $this->businessService->getUserInfo($user);
-        $data = ['userInfo' => $userInfo];
-        return view('Customer/userProfile')->with($data);
+        $jobHistories = $this->businessService->getJobHistoryFromUserInfo($userInfo);
+        $educations = $this->businessService->getEducationFromProfile($userInfo);
+        $data = ['user' => $user, 'userInfo' => $userInfo, 'jobHistories' => $jobHistories, 'educations' => $educations];
+        return view('Customer/userProfileDetails')->with($data);
     }
 }
