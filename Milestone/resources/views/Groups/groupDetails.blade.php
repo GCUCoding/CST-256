@@ -67,7 +67,15 @@
     	@endforeach
 		</table>
 	</div>
-	
+	@if($isAdminOrLeader == 1)
+	<form action="deleteGroup" method="post">
+		{{ csrf_field() }}
+		<input type="hidden" name="userId" value="<?php echo $groupMember->getUserId()?>"></input>
+    				<input type="hidden" name="groupId" value="<?php echo $groupId;?>"></input>
+    				<input type="submit" name="submission" value="Delete Group"></input>
+    				<h5><b>Warning: This is a permanent change.</b></h5>
+	</form>
+	@endif
 	@endsection
 </body>
 </html>

@@ -100,4 +100,10 @@ Route::post('/editGroup', 'GroupController@editGroup');
 
 Route::post('/viewGroup', 'GroupController@viewGroup');
 
+Route::post('/joinGroup', 'GroupController@joinGroup');
+
+Route::post('/leaveGroup', 'GroupController@leaveGroup');
+
+Route::post('/deleteGroup', 'GroupController@deleteGroup');
+
 ?>

@@ -1274,9 +1274,7 @@ class DataAccessObject
                 $id = $row['ID'];
                 $userID = $row['USERID'];
                 $groupID = $row['GROUPID'];
-                $isAdminOrLeader = [
-                    'ISADMINORLEADER'
-                ];
+                $isAdminOrLeader = $row['ISADMINORLEADER'];
                 $groupMember = new GroupMemberModel($id, $userID, $groupID, $isAdminOrLeader);
                 mysqli_free_result($result);
                 mysqli_close($this->conn);
@@ -1349,9 +1347,7 @@ class DataAccessObject
                 $id = $row['ID'];
                 $userID = $row['USERID'];
                 $groupID = $row['GROUPID'];
-                $isAdminOrLeader = [
-                    'ISADMINORLEADER'
-                ];
+                $isAdminOrLeader = $row['ISADMINORLEADER'];
                 $groupMember = new GroupMemberModel($id, $userID, $groupID, $isAdminOrLeader);
                 $groupMembers[] = $groupMember;
             }
@@ -1377,9 +1373,7 @@ class DataAccessObject
                 $id = $row['ID'];
                 $userID = $row['USERID'];
                 $groupID = $row['GROUPID'];
-                $isAdminOrLeader = [
-                    'ISADMINORLEADER'
-                ];
+                $isAdminOrLeader = $row['ISADMINORLEADER'];
                 $groupMember = new GroupMemberModel($id, $userID, $groupID, $isAdminOrLeader);
                 mysqli_free_result($result);
                 mysqli_close($this->conn);
@@ -1438,6 +1432,17 @@ class DataAccessObject
         catch (Exception $e)
         {
         }
+    }
+    
+    public function getGroupMemberFromUserID(GroupModel $group, int $userID)
+    {
+        $groupID = $group->getID();
+        $this->dbQuery = "SELECT * FROM groupmember WHERE GROUPID = '" . $groupID . "' AND USERID = '" . $userID . "'";
+        $result = mysqli_query($this->conn, $this->dbQuery);
+        $row = mysqli_fetch_assoc($result);
+        $groupMember = new GroupMemberModel($row['ID'], $row['USERID'], $row['GROUPID'], $row['ISADMINORLEADER']);
+        mysqli_close($this->conn);
+        return $groupMember;
     }
 }
 

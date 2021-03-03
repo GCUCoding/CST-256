@@ -5,6 +5,7 @@ class JobListingModel
 {
     private $id;
     private $title;
+    //start date and end date held in YYYY-MM-DD form. Make this more visually appealing?
     private $startDate;
     private $endDate;
     private $description;

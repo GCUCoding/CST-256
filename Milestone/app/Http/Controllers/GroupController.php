@@ -89,6 +89,69 @@ class GroupController extends Controller
         return view('Groups/groupDetails')->with($data);
     }
     
+    public function joinGroup(Request $request)
+    {
+        $this->businessService = new BusinessService();
+        $group = $this->businessService->getGroupFromID($request->input('groupId'));
+        $user = $this->businessService->getUserFromID($request->input('userId'));
+        $this->businessService->addGroupMember(new GroupMemberModel(null, $user->getID(), $group->getID(), 0));
+        $groupMembers = $this->businessService->getGroupMembersFromGroupID($group->getID());
+        $isAdminOrLeader = 0;
+        $isInGroup = 0;
+        foreach($groupMembers as $groupMember)
+        {
+            if($groupMember->getUserID() == $user->getID())
+            {
+                $isInGroup = 1;
+            }
+            if($groupMember->getUserID() == $user->getID() && $groupMember->getIsAdminOrLeader() == 1)
+            {
+                $isAdminOrLeader = 1;
+            }
+        }
+        if(session('role') == 1)
+        {
+            $isAdminOrLeader = 1;
+        }
+        
+        $data = ['group' => $group, 'groupMembers' => $groupMembers, 'user' => $user, 'isAdminOrLeader' => $isAdminOrLeader, 'isInGroup' => $isInGroup];
+        
+        return view('Groups/groupDetails')->with($data);
+        
+    }
+    
+    public function leaveGroup(Request $request)
+    {
+        $this->businessService = new BusinessService();
+        $group = $this->businessService->getGroupFromID($request->input('groupId'));
+        $user = $this->businessService->getUserFromID($request->input('userId'));
+        $groupMember = $this->businessService->getGroupMemberFromUserID($group, $user->getID());
+        $this->businessService->deleteGroupMember($groupMember);
+        $groupMembers = $this->businessService->getGroupMembersFromGroupID($group->getID());
+        $isAdminOrLeader = 0;
+        $isInGroup = 0;
+        foreach($groupMembers as $groupMember)
+        {
+            if($groupMember->getUserID() == $user->getID())
+            {
+                $isInGroup = 1;
+            }
+            if($groupMember->getUserID() == $user->getID() && $groupMember->getIsAdminOrLeader() == 1)
+            {
+                $isAdminOrLeader = 1;
+            }
+        }
+        if(session('role') == 1)
+        {
+            $isAdminOrLeader = 1;
+        }
+        
+        $data = ['group' => $group, 'groupMembers' => $groupMembers, 'user' => $user, 'isAdminOrLeader' => $isAdminOrLeader, 'isInGroup' => $isInGroup];
+        
+        return view('Groups/groupDetails')->with($data);
+        
+    }
+    
     public function editGroup(Request $request)
     {
         $this->businessService = new BusinessService();
@@ -102,5 +165,21 @@ class GroupController extends Controller
         }
         $data = ['groups' => $groups, 'groupMemberNums' => $groupMemberNums];
         return view('Groups/groupList')->with($data);
+    }
+    
+    public function deleteGroup(Request $request)
+    {
+        $this->businessService = new BusinessService();
+        $group = $this->businessService->getGroupFromID($request->input('groupId'));
+        $this->businessService->deleteGroup($group);
+        $groups = $this->businessService->getAllGroups();
+        $groupMemberNums = array();
+        foreach($groups as $group)
+        {
+            $groupMemberNums[] = $this->businessService->getNumOfGroupMembers($group);
+        }
+        $data = ['groups' => $groups, 'groupMemberNums' => $groupMemberNums];
+        return view('Groups/groupList')->with($data);
+        
     }
 }

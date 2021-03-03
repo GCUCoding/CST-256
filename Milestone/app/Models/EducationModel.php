@@ -3,6 +3,7 @@ namespace App\Models;
 class EducationModel
 {
     private $id;
+    //start date and end date held in YYYY-MM-DD form. Make this more visually appealing at least on the view side
     private $startDate;
     private $endDate;
     private $institution;

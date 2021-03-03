@@ -359,5 +359,11 @@ class BusinessService
         $this->dao = new DataAccessObject();
         return $this->dao->getNumOfGroupMembers($group);
     }
+    
+    public function getGroupMemberFromUserID($group, $userID)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->getGroupMemberFromUserID($group, $userID);
+    }
 }
 
