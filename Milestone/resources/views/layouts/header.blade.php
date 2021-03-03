@@ -1,10 +1,9 @@
 <!-- header(navbar) -->
-<!-- stylesheet -->
+<!-- stylesheet - Get rid of 'public/' when uploading to azure -->
 <link rel="stylesheet" type="text/css" href="{{ url('public/css/style.css') }}">
 
 <!-- Suspended/not logged in -->
 @if(null == session('role') || session('role') == -1)
-<link rel="stylesheet" type="text/css" href="{{ url('public/css/style.css') }}">
 <ul>
   <li><a href="home" class="button">Home</a></li>
   <li><a href="register" class="button">Register</a></li>
@@ -18,11 +17,8 @@ font-family: Brush Script MT, cursive;">Welcome to Linked Out</h2>
 
 <!-- Admin -->
 @elseif(session('role') == 1 || session('role') == 2)
-<link rel="stylesheet" type="text/css" href="{{ url('public/css/style.css') }}">
 <ul>
   	<li><a href="home" class="button">Home</a></li>
-    <!-- <li><a href="register" style="text-align:center;align:center;">Register</a></li> -->
-    <!-- <li><a href="login" style="text-align:center;align:center;">Login</a></li> -->
   	<li><a href="logged" class="button">View/Edit Users</a></li>
   	<li><a href="adminProfile" class="button" style="float: right;">Profile</a></li>
   	<li><a href="jobs" class="button">View Job Listings</a>

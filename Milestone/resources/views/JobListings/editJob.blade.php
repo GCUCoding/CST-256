@@ -58,15 +58,23 @@
 			<br>
 			<!-- input box to hold user's certifications -->
     		<label for="schedule">Schedule: <br>(Full-time, Part-time, etc.)</label><br>
-    		<input type='text' name='schedule' id='schedule' value = "<?php echo $schedule;?>"></input>
+    		<select id='schedule' name='schedule'>
+    			<option value="Full-Time">Full-Time</option>
+    			<option value="Part-Time">Part-Time</option>
+    			<option value="Intern">Intern</option>
+    			<option value="Seasonal">Seasonal</option>
+    		</select>
 			<br>
 			<!-- input box to hold user's certifications -->
     		<label for="pay">Pay: </label><br>
     		<input type='text' name='pay' id='pay' value = "<?php echo $pay;?>"></input>
 			<br>
 			<!-- input box to hold user's certifications -->
-    		<label for="active">Active?: <br>(1 for yes, 0 for no)</label><br>
-    		<input type='text' name='active' id='active' value = "<?php echo $active;?>"></input>
+    		<label for="active">Active: </label><br>
+    		<select id='active' name='active'>
+    			<option value="1">Yes</option>
+    			<option value="0">No</option>
+    		</select>
 			<br>
 			<!-- User ID and id used to determine which user's info is being edited -->
 			<input type="hidden" name="id" value="<?php echo $id;?>"></input>
