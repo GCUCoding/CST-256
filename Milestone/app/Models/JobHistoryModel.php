@@ -3,6 +3,7 @@ namespace App\Models;
 
 class JobHistoryModel
 {
+    //start date and end date held in YYYY-MM-DD form. Make this more visually appealing?
     private $id, $title, $startDate, $endDate, $description, $company, $profileID, $jobListingID;
     
     public function __construct($id, $title, $startDate, $endDate, $description, $company, $profileID, $jobListingID)
