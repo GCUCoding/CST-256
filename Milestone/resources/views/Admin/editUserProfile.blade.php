@@ -28,49 +28,38 @@
     <!-- necessary input for laravel forms -->
     {{ csrf_field() }}
     		<!-- input box to hold user's email -->
-    		<label for="email">Email: </label><br>
+    		<label for="email">Email: </label>
     		<input type='text' name='email' id='email' value="<?php echo $email;?>"></input>
 			<br>
 			<!-- input box to hold user's phone -->
-    		<label for="phone">Phone: </label><br>
+    		<label for="phone">Phone: </label>
     		<input type='text' name='phone' id='phone' value="<?php echo $phone;?>"></input>
 			<br>
 			<!-- input box to hold user's gender -->
-    		<label for="gender">Gender: </label><br>
+    		<label for="gender">Gender: </label>
     		<input type='text' name='gender' id='gender' value="<?php echo $gender;?>"></input>
     		<br>
     		<!-- input box to hold user's gender -->
-    		<label for="nationality">Nationality: </label><br>
+    		<label for="nationality">Nationality: </label>
     		<input type='text' name='nationality' id='nationality' value = "<?php echo $nationality;?>"></input>
 			<br>
 			<!-- input box to hold user's description -->
-    		<label for="description">Description: </label><br>
+    		<label for="description">Description: </label>
     		<input type='text' name='description' id='description' value = "<?php echo $description;?>"></input>
 			<br>
 			<!-- input box to hold user's skills -->
-    		<label for="skills">Skills: </label><br>
+    		<label for="skills">Skills: </label>
     		<input type='text' name='skills' id='skills' value = "<?php echo $skills;?>"></input>
 			<br>
 			<!-- input box to hold user's certifications -->
-    		<label for="certifications">Certifications: </label><br>
+    		<label for="certifications">Certifications: </label>
     		<input type='text' name='certifications' id='certifications' value = "<?php echo $certifications;?>"></input>
-			<br>
+			<br><br>
 			<!-- User ID and id used to determine which user's info is being edited -->
     	<input type="hidden" name="id" value="<?php echo $id;?>"></input>
     	<input type="hidden" name="userID" value="<?php echo $userID;?>"></input>
-    	<input type="submit" name="submission" value="Edit User Profile"></input>
+    	<input type="submit" name="submission" value="Save"></input>
     </form>
-    <form action="education" method="post">
-    	{{ csrf_field() }}
-    			<input type="hidden" name="profileID" value="<?php echo $id;?>"></input>
-    			<input type="submit" name="submitted" value="View/Edit Education"></input>
-    	</form>
-    	</form>
-    	<form action="jobHistory" method="post">
-    	{{ csrf_field() }}
-    			<input type="hidden" name="profileID" value="<?php echo $id;?>"></input>
-    			<input type="submit" name="submitted" value="View/Edit Job History"></input>
-    	</form>
     </div>
     
     @endsection

@@ -66,8 +66,10 @@ class LoginController extends Controller
             else 
             {
                 $userInfo = $this->businessService->getUserInfo($user);
-                $data = ['userInfo' => $userInfo];
-                return view('Customer/userProfile')->with($data);
+                $jobHistories = $this->businessService->getJobHistoryFromUserInfo($userInfo);
+                $educations = $this->businessService->getEducationFromProfile($userInfo);
+                $data = ['user' => $user, 'userInfo' => $userInfo, 'jobHistories' => $jobHistories, 'educations' => $educations];
+                return view('Customer/userProfileDetails')->with($data);
             }
         }
         else 
@@ -85,22 +87,32 @@ class LoginController extends Controller
         {
             return view('Customer/suspended');
         }
-        //returns the users view if admin
-        else if(session('role') == 1 || session('role') == 2)
-        {
-            $this->businessService = new BusinessService();
-            $users = $this->businessService->getAllUsers();
-            $data = ['users' => $users];
-            return view('Admin/users')->with($data);
-        }
         //returns the user's profile if the user is a customer
         else 
         {
             $this->businessService = new BusinessService();
             $user = $this->businessService->getUserFromID(session('userID'));
             $userInfo = $this->businessService->getUserInfo($user);
-            $data = ['userInfo' => $userInfo];
-            return view('Customer/userProfile')->with($data);
+            $jobHistories = $this->businessService->getJobHistoryFromUserInfo($userInfo);
+            $educations = $this->businessService->getEducationFromProfile($userInfo);
+            $data = ['user' => $user, 'userInfo' => $userInfo, 'jobHistories' => $jobHistories, 'educations' => $educations];
+            return view('Customer/userProfileDetails')->with($data);
+        }
+    }
+    
+    public function viewUsers()
+    {
+        //returns the users view if admin
+        if(session('role') == 1 || session('role') == 2)
+        {
+            $this->businessService = new BusinessService();
+            $users = $this->businessService->getAllUsers();
+            $data = ['users' => $users];
+            return view('Admin/users')->with($data);
+        }
+        else 
+        {
+            return view('security');
         }
     }
     
@@ -110,7 +122,7 @@ class LoginController extends Controller
         $user = $this->businessService->getUserFromID(session('userID'));
         $userInfo = $this->businessService->getUserInfo($user);
         $data = ['userInfo' => $userInfo];
-        return view('Customer/userProfile')->with($data);
+        return view('Customer/editUserProfile')->with($data);
     }
     //logs user out and destroys the session
     public function logout()
