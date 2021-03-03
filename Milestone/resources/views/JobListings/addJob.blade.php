@@ -43,8 +43,13 @@
     		<input type='text' name='position' id='position' value = ""></input>
 			<br>
 			<!-- input box to hold user's certifications -->
-    		<label for="schedule">Schedule: <br>(Full-time, Part-time, etc.)</label><br>
-    		<input type='text' name='schedule' id='schedule' value = ""></input>
+    		<label for="schedule">Schedule: </label>
+    		<select id='schedule' name='schedule'>
+    			<option value="Full-Time">Full-Time</option>
+    			<option value="Part-Time">Part-Time</option>
+    			<option value="Intern">Intern</option>
+    			<option value="Seasonal">Seasonal</option>
+    		</select>
 			<br>
 			<!-- input box to hold user's certifications -->
     		<label for="pay">Pay: </label>

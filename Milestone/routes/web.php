@@ -68,6 +68,12 @@ Route::post('/education', 'EducationController@index');
 
 Route::post('/editEducation', 'EducationController@edit');
 
+Route::post('/addEducation', 'EducationController@addEducation');
+
+Route::post('/newEducation', 'EducationController@newEducation');
+
+Route::post('/deleteEducation', 'EducationController@deleteEducation');
+
 Route::get('/jobs', 'JobListingController@index');
 
 Route::post('/addJob', 'JobListingController@addJobPage');
@@ -91,6 +97,8 @@ Route::post('/editJobHistoryPage', 'JobHistoryController@jobHistoryEditPage');
 Route::post('/viewJobHistory', 'JobHistoryController@viewJobHistoryDetails');
 
 Route::post('/editJobHistory', 'JobHistoryController@editJobHistory');
+
+Route::post('/deleteJobHistory', 'JobHistoryController@deleteJobHistory');
 
 Route::get('/groups', 'GroupController@index');
 

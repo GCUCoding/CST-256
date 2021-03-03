@@ -56,8 +56,17 @@ class JobListingController extends Controller
         $jobListing = new JobListingModel($request->input('id'), $request->input('title'), $request->input('startDate'), $request->input('endDate'), $request->input('description'), $request->input('qualifications'), $request->input('company'), $request->input('position'), $request->input('schedule'), $request->input('pay'), $request->input('active'));
         $this->businessService->updateJobListing($jobListing);
         $jobListing = $this->businessService->getJobListingFromID($request->input('id'));
-        $data = ['jobListing' => $jobListing];
-        return view('JobListings/jobDetails')->with($data);
+        if($jobListing->getActive() == 0)
+        {
+            $jobListings = $this->businessService->getActiveJobListings();
+            $data = ['jobListings' => $jobListings];
+            return view('JobListings/joblistings')->with($data);
+        }
+        else
+        {
+            $data = ['jobListing' => $jobListing];
+            return view('JobListings/jobDetails')->with($data);
+        }
     }
     
     public function viewEditPage(Request $request)
