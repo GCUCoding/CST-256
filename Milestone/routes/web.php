@@ -86,6 +86,8 @@ Route::post('/editJob', 'JobListingController@editJobListing');
 
 Route::post('/editJobPage', 'JobListingController@viewEditPage');
 
+Route::post('/searchJob', 'JobListingController@jobListingSearch');
+
 Route::post('/jobHistory', 'JobHistoryController@index');
 
 Route::post('/addJobHistory', 'JobHistoryController@addJobHistory');

@@ -76,4 +76,14 @@ class JobListingController extends Controller
         $data = ['jobListing' => $jobListing];
         return view('JobListings/editJob')->with($data);
     }
+    
+    //return a list of jobs from search 
+    public function jobListingSearch(Request $request)
+    {
+        $this->businessService = new BusinessService();
+        $jobListings = $this->businessService->searchJobListings($request->input('searchString'));
+        $data = ['jobListings' => $jobListings];
+        return view('JobListings/joblistings')->with($data);
+    }
+    
 }

@@ -211,6 +211,13 @@ class BusinessService
         return $this->dao->getJobListingFromID($jobListingID);
     }
     
+    //asks the database to get job listings based on a give user query
+    public function searchJobListings($query)
+    {
+        $this->dao = new DataAccessObject();
+        return $this->dao->searchJobListings($query);
+    }
+    
     /*====================================================================================================================
      *JOBHISTORY STUFF
      *====================================================================================================================*/

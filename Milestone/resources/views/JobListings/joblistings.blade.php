@@ -18,7 +18,8 @@
 		</form>		
 		@endif
 		<form action="searchJob" method="post">
-			<input type="text" id="searchString" placeholder="Search..."></input><input type="submit" name="submission" value="Search"></input>
+		{{ csrf_field() }}
+			<input type="text" id="searchString" name="searchString" placeholder="Search..."></input><input type="submit" name="submission" value="Search"></input>
 		</form>
 		<!-- table headers set up to hold users -->
     	<table class="usersTable">
