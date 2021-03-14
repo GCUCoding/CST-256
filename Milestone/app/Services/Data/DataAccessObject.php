@@ -819,7 +819,7 @@ class DataAccessObject
     {
         try
         {
-            $this->dbQuery = "SELECT * FROM joblisting WHERE TITLE LIKE '" . $query . "' OR DESCRIPTION LIKE '" . $query ."' OR POSITION LIKE '" . $query . "'";
+            $this->dbQuery = "SELECT * FROM joblisting WHERE TITLE LIKE '%" . $query . "%' OR DESCRIPTION LIKE '%" . $query ."%' OR POSITION LIKE '%" . $query . "%' OR COMPANY LIKE '%" . $query . "%'";
             if($result = mysqli_query($this->conn, $this->dbQuery))
             {
                 $jobListings = array();
