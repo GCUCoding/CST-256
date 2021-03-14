@@ -815,6 +815,43 @@ class DataAccessObject
         }
     }
 
+    public function searchJobListings(string $query)
+    {
+        try
+        {
+            $this->dbQuery = "SELECT * FROM joblisting WHERE TITLE LIKE '" . $query . "' OR DESCRIPTION LIKE '" . $query ."'";
+            if($result = mysqli_query($this->conn, $this->dbQuery))
+            {
+                $jobListings = array();
+                while($row = mysqli_fetch_assoc($result))
+                {
+                    $id = $row['ID'];
+                    $title = $row['TITLE'];
+                    $startDate = $row['STARTDATE'];
+                    $endDate = $row['ENDDATE'];
+                    $description = $row['DESCRIPTION'];
+                    $qualifications = $row['QUALIFICATIONS'];
+                    $company = $row['COMPANY'];
+                    $position = $row['POSITION'];
+                    $schedule = $row['SCHEDULE'];
+                    $pay = $row['PAY'];
+                    $active = $row['ACTIVE'];
+                    $jobListing = new JobListingModel($id, $title, $startDate, $endDate, $description, $qualifications, $company, $position, $schedule, $pay, $active);
+                    $jobListings[] = $jobListing;
+                }
+                return $jobListings;
+            }
+            else
+            {
+                echo mysqli_error($this->conn);
+            }
+        }
+        catch (Exception $e)
+        {
+            
+        }
+    }
+
     /*
      * ====================================================================================================================
      * JOB HISTORY STUFF
@@ -1120,7 +1157,7 @@ class DataAccessObject
         {
         }
     }
-    
+
     public function getGroupFromTitle(string $groupTitle)
     {
         try
@@ -1406,7 +1443,7 @@ class DataAccessObject
         {
         }
     }
-    
+
     public function isMemberInGroup(GroupModel $group, UserModel $user)
     {
         $userID = $user->getID();
@@ -1415,25 +1452,24 @@ class DataAccessObject
         {
             $this->dbQuery = "SELECT * FROM groupmember WHERE GROUPID = '" . $groupID . "' AND USERID = '" . $userID . "'";
             $result = mysqli_query($this->conn, $this->dbQuery);
-            if(mysqli_num_rows($result) > 0)
+            if (mysqli_num_rows($result) > 0)
             {
                 mysqli_free_result($result);
                 mysqli_close($this->conn);
                 return true;
             }
-            else 
+            else
             {
                 mysqli_free_result($result);
                 mysqli_close($this->conn);
                 return false;
             }
-            
         }
         catch (Exception $e)
         {
         }
     }
-    
+
     public function getGroupMemberFromUserID(GroupModel $group, int $userID)
     {
         $groupID = $group->getID();
