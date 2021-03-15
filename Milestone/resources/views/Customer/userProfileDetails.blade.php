@@ -27,28 +27,53 @@ use App\Models\JobHistoryModel;
 	$userInfoSkills = $userInfo->getSkills();
 	$userInfoCertifications = $userInfo->getCertifications();
 	?>
-	<h1>Welcome back <?php echo $username?></h1>
 	<!-- Start of Container div -->
 	<div class="profileContainer">
+	<h1>Welcome back <?php echo $username?>!</h1>
+		<div class="profileInnerContainer">
 		<!-- Start of User Profile div -->
-		<div class="editForm">
+		<div class="profileInfo">
+    		<h2 style="text-decoration: underline;">My Profile Info:</h2>
+    		<table class="alignedFormTable">
+    			<tr>
+    				<th><b>Email:</b></th>
+    				<td><?php echo $userInfoEmail?></td>
+    			</tr>
+    			<tr>
+    				<th><b>Phone Number:</b></th>
+    				<td><?php echo $userInfoPhone?></td>
+    			</tr>
+    			<tr>
+    				<th><b>Gender:</b></th>
+    				<td><?php echo $userInfoGender?></td>
+    			</tr>
+    			<tr>
+    				<th><b>Nationality:</b></th>
+    				<td><?php echo $userInfoNationality?></td>
+    			</tr>
+    			<tr>
+    				<th><b>About Me:</b></th>
+    				<td><?php echo $userInfoDescription?></td>
+    			</tr>
+    			<tr>
+    				<th><b>Skills:</b></th>
+    				<td><?php echo $userInfoSkills?></td>
+    			</tr>
+    			<tr>
+    				<th><b>Certifications:</b></th>
+    				<td><?php echo $userInfoCertifications?></td>
+    			</tr>
+    		</table>
+    		<br/>
 			<form action="editProfilePage" method="post">
             	{{ csrf_field() }}
-        		<h1 style="text-decoration: underline;">My Profile Info:</h1>
-        		<h2><b>Email:</b> <?php echo $userInfoEmail?></h2>
-        		<h2><b>Phone Number:</b> <?php echo $userInfoPhone?></h2>
-        		<h2><b>Gender:</b> <?php echo $userInfoGender?></h2>
-        		<h2><b>Nationality:</b> <?php echo $userInfoNationality?></h2>
-        		<h2><b>About Me:</b> <?php echo $userInfoDescription?></h2>
-        		<h2><b>Skills:</b> <?php echo $userInfoSkills?></h2>
-        		<h2><b>Certifications:</b> <?php echo $userInfoCertifications?></h2>
             	<input type="hidden" name="id" value="<?php echo $userID;?>"></input>
             	<input type="submit" name="submission" value="Edit Profile"></input>
     		</form>
 		</div><!-- End of User Profile div -->
-		<!-- Start of User Profile div -->
-		<div class="editForm">
-			
+		<!-- Start of Education div -->
+		<div class="profileEducation">
+			<h2 style="text-decoration: underline;">My Education Info:</h2>
     		<!-- table headers set up to hold users -->
         	<table class="usersTable">
             	<tr>
@@ -86,13 +111,15 @@ use App\Models\JobHistoryModel;
             	</tr>
         	@endforeach
     		</table>
+    		<br/>
          	<form action="addEducation" method="post"> 
      		{{ csrf_field() }} 
     		<input type="submit" name="submission" value="Add Education"></input>
      		</form> 
 		</div><!-- End of User Profile div -->
 	    <!-- Start of Job history div -->
-    	<div class="editForm">
+    	<div class="profileJobHistory">
+    		<h2 style="text-decoration: underline;">My Job History:</h2>
     		<!-- table headers set up to hold users -->
         	<table class="usersTable">
             	<tr>
@@ -137,11 +164,13 @@ use App\Models\JobHistoryModel;
             	</tr>
         	@endforeach
     		</table>
+    		<br/>
 			<form action="addJobHistory" method="post">
     			{{ csrf_field() }}
     			<input type="submit" name="submission" value="Add Job History"></input>
     		</form>
     	</div><!-- End of Job history div -->
+		</div>
 	</div><!-- End of Container div -->
 	@endsection
 </body>

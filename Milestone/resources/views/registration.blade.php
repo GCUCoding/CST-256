@@ -11,21 +11,28 @@
 	@section('title', 'Registration Page')
 	@section('content')
 	<div class = "editForm">
-	<!-- form that allows the user to register themselves -->
-	<h2>Register for an account:</h2>
-	<form action="registered" method="post">
-	{{ csrf_field() }}
-    	<label for="username">Username</label>
-    	<input type="text" name="username" id="username"></input>
-    	<?php echo $errors->first('username')?>
-		<br>
-    	<label for="password">Password</label>
-    	<input type="password" name="password" id="password"></input>
-    	<?php echo $errors->first('password')?>
-		<br>
-    	<input type="submit" name="submitted" value="Submit"></input>
-    </p>
-    </form>
+	   <!-- form that allows the user to register themselves -->
+		<h2>Register for an account:</h2>
+		<form action="registered" method="post">
+		{{ csrf_field() }}
+			<table class="alignedFormTable">
+    			<tr>
+                	<th><label for="username">Username:</label></th>
+                	<td>
+                		<input type="text" name="username" id="username"></input>
+                		<?php echo $errors->first('username')?>
+                	</td>
+            	</tr>
+            	<tr>
+                	<th><label for="password">Password:</label></th>
+                	<td>
+                		<input type="password" name="password" id="password"></input>
+                		<?php echo $errors->first('password')?>
+                	</td>
+                </tr>
+            </table>
+            <input type="submit" name="submitted" value="Submit"></input>
+    	</form>
     </div>
     @endsection
     </body>
