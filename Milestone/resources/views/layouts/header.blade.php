@@ -5,9 +5,9 @@
 <!-- Suspended/not logged in -->
 @if(null == session('role') || session('role') == -1)
 <ul>
-  <li><a href="home" class="button">Home</a></li>
-  <li><a href="register" class="button">Register</a></li>
-  <li><a href="login" class="button">Login</a></li>
+  <li><a href="home" class="navButton">Home</a></li>
+  <li><a href="register" class="navButton">Register</a></li>
+  <li><a href="login" class="navButton">Login</a></li>
 </ul>
 <br>
 <h2 style="
@@ -18,11 +18,11 @@ font-family: Brush Script MT, cursive;">Welcome to Linked Out</h2>
 <!-- Admin -->
 @elseif(session('role') == 1 || session('role') == 2)
 <ul>
-  	<li><a href="home" class="button">Home</a></li>
-  	<li><a href="profile" class="button">Profile</a></li>
-  	<li><a href="viewUsers" class="button">View/Edit Users</a></li>
-  	<li><a href="jobs" class="button">View Job Listings</a>
-  	<li><a href="groups" class="button">Groups</a>
+  	<li><a href="home" class="navButton">Home</a></li>
+  	<li><a href="profile" class="navButton">Profile</a></li>
+  	<li><a href="viewUsers" class="navButton">View/Edit Users</a></li>
+  	<li><a href="jobs" class="navButton">View Job Listings</a>
+  	<li><a href="groups" class="navButton">Groups</a>
   	<li><a href="logout" class="logOutButton">Log Out</a></li>
 
 </ul>
@@ -35,10 +35,10 @@ font-family: Brush Script MT, cursive;">Welcome to Linked Out</h2>
 <!-- Base user -->
 @elseif(session('role') == 3)
 <ul>
-  	 <li><a href="home" class="button">Home</a></li>
-  	 <li><a href="profile" class="button">Profile</a></li>
-  	 <li><a href="jobs" class="button">View Job Listings</a>
-  	 <li><a href="groups" class="button">Groups</a>
+  	 <li><a href="home" class="navButton">Home</a></li>
+  	 <li><a href="profile" class="navButton">Profile</a></li>
+  	 <li><a href="jobs" class="navButton">View Job Listings</a>
+  	 <li><a href="groups" class="navButton">Groups</a>
   	 <li><a href="logout" class="logOutButton">Log Out</a></li>
 
 </ul>
@@ -47,9 +47,9 @@ font-family: Brush Script MT, cursive;">Welcome to Linked Out</h2>
 @else
 
 <ul>
-  	<li><a href="home" class="button">Home</a></li>
-	<li><a href="register" class="button">Register</a></li>
-	<li><a href="login" class="button">Login</a></li>
+  	<li><a href="home" class="navButton">Home</a></li>
+	<li><a href="register" class="navButton">Register</a></li>
+	<li><a href="login" class="navButton">Login</a></li>
 </ul>
 <br/>
 <h2 style="
