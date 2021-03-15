@@ -86,4 +86,15 @@ class JobListingController extends Controller
         return view('JobListings/joblistings')->with($data);
     }
     
+    //auto fills the apply form based on user info
+    public function applyToJob() 
+    {
+        $this->businessService = new BusinessService();
+        $id = session('userID');
+        $user = $this->businessService->getUserFromID($id);
+        $userInfo = $this->businessService->getUserInfo($user);
+        $data = ['userInfo' => $userInfo];
+        return view('JobListings/applyToJob')->with($data);
+    }
+    
 }
