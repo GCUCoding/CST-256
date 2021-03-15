@@ -39,6 +39,10 @@
     		<input type="submit" name="submission" value="Edit"></input>
     	@endif
 	</form>
+	<form action="applyToJob" method="post">
+	{{ csrf_field() }}
+    	<input type="submit" name="apply" Value="Apply"></input>
+    </form>
 	</div>
 	
 	@endsection
