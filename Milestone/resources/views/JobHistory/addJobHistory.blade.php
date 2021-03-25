@@ -19,11 +19,11 @@
 			<br>
 			<!-- input box to hold user's phone -->
     		<label for="startDate">Start Date: </label>
-    		<input type='date' name='startDate' id='startDate' value=""></input>
+    		<input type='date' name='startDate' id='date1' onchange="dateCheck()" value=""></input>
 			<br>
 			<!-- input box to hold user's gender -->
     		<label for="endDate">End Date: </label>
-    		<input type='date' name='endDate' id='endDate' value=""></input>
+    		<input type='date' name='endDate' id='date2' onchange="dateCheck()" value=""></input>
     		<br>
     		<!-- input box to hold user's gender -->
     		<label for="description">Description: </label>

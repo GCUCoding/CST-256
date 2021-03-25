@@ -46,13 +46,13 @@
 			<!-- User ID and id used to determine which user's info is being edited -->
 			<input type="hidden" name="id" value="<?php echo $id;?>"></input>
 			<input type="hidden" name="profileID" value="<?php echo $profileID?>"></input>
-    	<input type="submit" name="submission" value="Save Changes"></input>
+    	<input type="submit" name="submission" value="Save Changes" onclick="return check('edit', 'job history')"></input>
     </form>
     <form action="deleteJobHistory" method="post">
 		{{ csrf_field() }}
 		<input type="hidden" name="userInfoID" value="<?php echo $profileID?>"></input>
     				<input type="hidden" name="id" value="<?php echo $id;?>"></input>
-    				<input type="submit" name="submission" style="background-color: red; color: white;" value="Delete Job"></input>
+    				<input type="submit" name="submission" style="background-color: red; color: white;" value="Delete Job" onclick="return check('delete', 'job history')"></input>
     				<h4><b style="color: red; font-weight: 700;">Warning: This is a permanent change.</b></h4>
 	</form>
     </div>

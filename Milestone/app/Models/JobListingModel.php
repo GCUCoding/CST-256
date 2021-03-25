@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-class JobListingModel
+class JobListingModel implements \JsonSerializable
 {
     private $id;
     private $title;
@@ -75,5 +75,10 @@ class JobListingModel
     {
         return $this->active;
     }
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
+
 }
 

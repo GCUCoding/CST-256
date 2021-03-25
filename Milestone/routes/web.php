@@ -124,4 +124,8 @@ Route::post('/deleteGroup', 'GroupController@deleteGroup');
 
 Route::post('/toEditGroup', 'GroupController@toEditGroup');
 
+Route::resource('/usersrest', 'UsersRestController');
+
+Route::resource('/jobsrest', 'JobsRestController');
+
 ?>

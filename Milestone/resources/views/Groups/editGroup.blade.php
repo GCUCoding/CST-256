@@ -29,7 +29,7 @@
 			<br>
 			<!-- User ID and id used to determine which user's info is being edited -->
 			<input type="hidden" name="id" value="<?php echo $id;?>"></input>
-    	<input type="submit" name="submission" value="Save Changes"></input>
+    	<input type="submit" name="submission" value="Save Changes" onclick="return check('edit', 'group')"></input>
     </form>
     </div>
     @endsection

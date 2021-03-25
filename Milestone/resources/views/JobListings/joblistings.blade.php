@@ -17,6 +17,9 @@
 			<input type="submit" name="submission" value="Create a new job listing"></input>
 		</form>		
 		@endif
+		@if(null !== session('pageNum'))
+		<?php session(['pageNum' => 0])?>
+		@endif
 		<form action="searchJob" method="post">
 		{{ csrf_field() }}
 			<input class="search" type="text" id="searchString" name="searchString" placeholder="Search..." style="background-image: url('public/css/pictures/searchIcon.png'); background-size: 20px 20px; background-position: 3px 3px; background-repeat: no-repeat; padding-left: 30px;">

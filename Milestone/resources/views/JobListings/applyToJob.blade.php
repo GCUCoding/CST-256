@@ -60,7 +60,7 @@
 			<!-- User ID and id used to determine which user's info is being edited -->
     	<input type="hidden" name="id" value="<?php echo $id;?>"></input>
     	<input type="hidden" name="userID" value="<?php echo $userID;?>"></input>
-    	<input type="submit" name="submission" value="Apply"></input>
+    	<input type="submit" name="submission" value="Apply" onclick="applySuccess()"></input>
     </form>
     </div>
     @endsection

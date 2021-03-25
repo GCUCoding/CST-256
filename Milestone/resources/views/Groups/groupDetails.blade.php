@@ -74,7 +74,7 @@
 		{{ csrf_field() }}
 		<input type="hidden" name="userId" value="<?php echo $groupMember->getUserId()?>"></input>
     				<input type="hidden" name="groupId" value="<?php echo $groupId;?>"></input>
-    				<input type="submit" name="submission" style="background-color: red; color: white;" value="Delete Group"></input>
+    				<input type="submit" name="submission" style="background-color: red; color: white;" value="Delete Group" onclick="return check('delete', 'group')"></input>
     				<h4><b style="color: red; font-weight: 700;">Warning: This is a permanent change.</b></h4>
 	</form>
 	@endif

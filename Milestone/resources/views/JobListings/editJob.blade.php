@@ -70,7 +70,7 @@
 			<br>
 			<!-- input box to hold user's certifications -->
     		<label for="active">Active: </label>
-    		<select id='active' name='active'>
+    		<select id='active' name='active' onchange="return activitychange()">
     			<option value="1">Yes</option>
     			<option value="0">No</option>
     		</select>
