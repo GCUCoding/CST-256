@@ -6,7 +6,7 @@
 <title>All Users</title>
 </head>
     <body>
-    <!-- use layours -->
+    <!-- use layouts -->
     	@extends('layouts.appmaster')
 		@section('title', 'Login Page')
 		@section('content')

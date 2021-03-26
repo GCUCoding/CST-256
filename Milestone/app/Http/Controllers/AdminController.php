@@ -105,4 +105,6 @@ class AdminController extends Controller
         $data = ['users' => $users];
         return view('Admin/users')->with($data);
     }
+    
+
 }

@@ -807,7 +807,7 @@ class DataAccessObject
             else
             {
                 mysqli_close($this->conn);
-                return - 1;
+                return null;
             }
         }
         catch (Exception $e)

@@ -20,7 +20,7 @@ class JobsRestController extends Controller
         if(sizeof($data) == 0)
         {
             $errorCode = 456;
-            $errorMessage = "No jobs found.";
+            $errorMessage = "No jobs found."; 
             $dto = new DTOModel($errorCode, $errorMessage, $data);
         }
         else
