@@ -52,7 +52,7 @@
     	<!-- hidden forms to specify which user's userinfo should be updated -->
     	<input type="hidden" name="id" value="<?php echo $id;?>"></input>
     	<input type="hidden" name="userID" value="<?php echo $userID;?>"></input>
-    	<input type="submit" name="submission" value="Save"></input>
+    	<input type="submit" name="submission" value="Save" onclick="return check('edit','profile')"></input>
     	</form>
     	</div>
     @endsection

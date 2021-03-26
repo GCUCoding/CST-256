@@ -17,10 +17,10 @@
     {{ csrf_field() }}
     		<!-- input box to hold user's email -->
     		<label for="startDate">Start Date: </label></br>
-    		<input type="date" name="startDate"></input>
+    		<input type="date" name="startDate" id="date1" onchange="dateCheck()"></input>
     		</br>
     		<label for="endDate">Graduation Date: </label></br>
-    		<input type="date" name="endDate"></input>
+    		<input type="date" name="endDate" id="date2" onchange="dateCheck()"></input>
     		</br>
     		<label for="title">Degree: </label><br>
     		<input type='text' name='title' id='title' value=""></input>

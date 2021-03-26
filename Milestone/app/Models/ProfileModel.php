@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-class ProfileModel
+class ProfileModel implements \JsonSerializable
 {
     
     //declares variables to hold the necessary information for a user profile
@@ -74,6 +74,11 @@ class ProfileModel
     {
         return $this->userID;
     }
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
+
     
 }
 ?>

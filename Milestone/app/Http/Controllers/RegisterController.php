@@ -67,12 +67,19 @@ class RegisterController extends Controller
                 session(['role' => $user->getRole()]) ;
             }
             //returns the user to the website home page after registration
+            echo '<script type="text/javascript">',
+            'alert("Registration successful!");',
+            '</script>'
+                ;
             return View('home');
         }
         else 
         {
-            //returns the user to registration page if registration fails
-            return View('registration');
+            echo '<script type="text/javascript">',
+            'alert("This username is already in use. \nPlease try a different one.");',
+            '</script>'
+            ;
+            return View("registration");
         }
     }
     

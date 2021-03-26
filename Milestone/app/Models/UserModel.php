@@ -2,7 +2,7 @@
 namespace App\Models;
 
 
-class UserModel
+class UserModel implements \JsonSerializable
 {
     //declares fields necessary for a User
     private $id;
@@ -36,6 +36,11 @@ class UserModel
     {
         return $this->role;
     }
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
+
     
 }
 

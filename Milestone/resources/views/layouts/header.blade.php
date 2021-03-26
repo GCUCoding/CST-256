@@ -23,6 +23,7 @@ font-family: Brush Script MT, cursive;">Welcome to Linked Out</h2>
   	<li><a href="viewUsers" class="navButton">View/Edit Users</a></li>
   	<li><a href="jobs" class="navButton">View Job Listings</a>
   	<li><a href="groups" class="navButton">Groups</a>
+  	<li><a href="apis" class="navButton">APIs</a></li>
   	<li><a href="logout" class="logOutButton">Log Out</a></li>
 
 </ul>

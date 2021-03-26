@@ -20,18 +20,22 @@
                 	<th><label for="username">Username:</label></th>
                 	<td>
                 		<input type="text" name="username" id="username"></input>
-                		<?php echo $errors->first('username')?>
                 	</td>
             	</tr>
             	<tr>
                 	<th><label for="password">Password:</label></th>
                 	<td>
-                		<input type="password" name="password" id="password"></input>
-                		<?php echo $errors->first('password')?>
+                		<input type="password" name="password" id="pass1"></input>
+                	</td>
+                </tr>
+                <tr>
+                	<th><label for="confirmPass">Confirm Password:</label></th>
+                	<td>
+                		<input type="password" name="password" id="pass2"></input>
                 	</td>
                 </tr>
             </table>
-            <input type="submit" name="submitted" value="Submit"></input>
+            <input type="submit" name="submitted" value="Submit" onclick="return confPass()"></input>
     	</form>
     </div>
     @endsection
