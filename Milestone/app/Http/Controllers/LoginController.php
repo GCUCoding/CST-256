@@ -6,25 +6,26 @@ use App\Models\UserModel;
 use App\Services\Business\BusinessService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Services\Business\BusinessValidation;
 
 //handles logging in
 class LoginController extends Controller
 {
     //declares a variable to hold a BusinessService Object
     private $businessService;
-    
+    private $businessValidation;
     //logs a user in and routes them to the proper login page
     public function index(Request $request)
     {
         //initializes a new BusinessService object
         $this->businessService = new BusinessService();
-        
+        $this->businessValidation = new BusinessValidation();
         //validates that the login information is properly formatted
         $this->validateForm($request);
         
         //gets the username and password input in the previous form
-        $username = $request->input('username');
-        $password = $request->input('password');
+        $username = $this->businessValidation->cleanString($request->input('username'));
+        $password = $this->businessValidation->cleanString($request->input('password'));
         
         //ensures that the user is in the database
         if($this->businessService->Authenticate($username, $password))
